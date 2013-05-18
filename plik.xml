@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<osoby>
+  <osoba plec="mężczyzna">
+   <imie>Jan</imie>
+   <nazwisko>Kowalski</nazwisko>
+  </osoba>
+  <osoba plec="kobieta">
+   <imie>Anna</imie>
+   <nazwisko>Nowak</nazwisko>
+  </osoba>
+</osoby>

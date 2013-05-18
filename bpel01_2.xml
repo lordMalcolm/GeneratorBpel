@@ -1,0 +1,28 @@
+<sequence name="main">
+	<sequence name="S1">
+	
+		<sequence name="F">
+			<action name="a" />
+			<flow>  
+				<action name="b" />
+				<action name="c" />
+			</flow>
+		</sequence>
+
+		<switch name="SW">
+			<case name="boolExpr-d">
+				<action name="e" />
+			 </case>
+			<otherwise>
+				<action name="f" />
+			</otherwise>
+		</switch>
+
+	</sequence>
+	
+	<sequence name="S1">
+		<action name="g" />
+		<action name="h" />
+	</sequence>
+
+</sequence>
