@@ -15,6 +15,10 @@ public abstract class BaseDesignPattern {
     public List<String> Arguments;
     public List<BaseDesignPattern> NestedPatterns;
     public int DeepLevel;
+
+    public BaseDesignPattern() {
+        Arguments = new ArrayList<>();
+    }
     
     public String ToString() {
         StringBuilder sb = new StringBuilder();
@@ -23,18 +27,17 @@ public abstract class BaseDesignPattern {
             sb.append(Name);
         }
         if (Type != null) {
-            sb.append(" typ: ");
+            sb.append(", typ: ");
             sb.append(Type.toString());
         }
         if(Arguments != null) {
-            sb.append(" argumenty: ");
+            sb.append(", argumenty: ");
             for(String s: Arguments){
                 sb.append(s);
-                sb.append(" ");
+                sb.append(", ");
             }
         }
-        sb.append(" poziom: ");
-        sb.append(DeepLevel);
+        
         String result =  new String(sb);
         return result;
     }

@@ -10,14 +10,10 @@ public class SequencePattern extends BaseDesignPattern {
     public void Process(Element mainNode) {    
         List<Element> properChildren = this.GetProperChildrenAsElements(mainNode);
         List<String> childrenNames = this.GetChildrenNames(properChildren);
-        System.out.print(mainNode.getAttribute("name"));
-        System.out.print("-SEQUENCE(");
-        System.out.print(childrenNames.get(0));
-        System.out.print(",");
-        System.out.print(childrenNames.get(1));
-        System.out.print(")");
-        System.out.println();
-        
+
        this.Type = DesignPatternType.Sequence;
+       this.Name = mainNode.getAttribute("name");
+       this.Arguments.add(childrenNames.get(0));
+       this.Arguments.add(childrenNames.get(1));
     }
 }

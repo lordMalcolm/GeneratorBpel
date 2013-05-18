@@ -27,9 +27,6 @@ public class GeneratorUI {
         try {
             Initialize();
             String fileName = "bpel02.xml";
-//            System.out.println("Podaj nazwe pliku:");
-//            BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-//            fileName = br.readLine();
             File file = new File(fileName);
             document = _db.parse(file);
             

@@ -21,16 +21,11 @@ public class SwitchPattern extends BaseDesignPattern{
             }
         }
         
-        System.out.print(mainNode.getAttribute("name"));
-        System.out.print("-SWITCH(");
-        System.out.print(childrenNames.get(0));
-        System.out.print(",");
-        System.out.print(n.get(0));
-        System.out.print(",");
-        System.out.print(n.get(1));
-        System.out.print(")");
-        System.out.println();
-        
         this.Type = DesignPatternType.Switch;
+        this.Name = mainNode.getAttribute("name");
+        this.Arguments.add(childrenNames.get(0));
+        this.Arguments.add(n.get(0));
+        this.Arguments.add(n.get(1));
+        
     }
 }

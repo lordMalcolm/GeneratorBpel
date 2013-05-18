@@ -22,6 +22,7 @@ public class Generator {
     }
     
     //metoda uruchamiająca rekurencyjne przeszukiwanie drzewa XML, zwraca liste znalezionych wzorcow
+    //docelowo powinna być zwracana struktura drzewiasta, będzie się lepiej dalej interpretowało
     public List<BaseDesignPattern> Scan() {
         this.searchTree(_doc.getDocumentElement(), 0);
         return _designPatterns;
