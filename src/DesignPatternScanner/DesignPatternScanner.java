@@ -9,7 +9,6 @@ import org.w3c.dom.NodeList;
 public class DesignPatternScanner {
 
     public BaseDesignPattern GetPatternIfAny(Element mainNode) {
-        
         DesignPatternType type = GetPatternType(mainNode);
         
         if (type == null)
@@ -17,7 +16,6 @@ public class DesignPatternScanner {
         
         BaseDesignPattern pattern = DesignPatternFactory.CreatePattern(type);
         pattern.Process(mainNode);
-        
         return pattern;
     }
     
@@ -41,10 +39,7 @@ public class DesignPatternScanner {
     }
     
     private boolean CheckIfFlow(Element node) {
-        NodeList children = node.getChildNodes();
-        Node secondChild = children.item(1);
-        
-        if(secondChild.getNodeName().equals("flow"))
+        if(node.getChildNodes().item(1).getNodeName().equals("flow"))
             return true;
         return false;
     }

@@ -4,30 +4,33 @@ import DesignPatternScanner.DesignPatternType;
 import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class FlowPattern extends BaseDesignPattern {
     
     @Override
     public void Process(Element mainNode) {
         
-        List<Element> properChildren = GetProperChildrenAsElements(mainNode);
-        List<String> childrenNames = GetChildrenNames(properChildren);
-        List<String> n = new ArrayList<>();
+        NodeList children = mainNode.getChildNodes();
+        Element first = (Element) children.item(0);
+
+        Element flow = (Element) children.item(1);
+        List<Element> flowChildren = GetProperChildrenAsElements(flow);
         
-        for (Element element : properChildren) {
-            List<Element> nestedChildren = GetProperChildrenAsElements(element);
-            for(Element nested: nestedChildren){
-                n.add(nested.getAttribute("name"));
-            }
+        List<String> flowChNames = new ArrayList<>();
+        
+        for(int i = 0; i < flowChildren.size(); i++){
+            Element flowChild = (Element) flowChildren.get(i);
+            flowChNames.add(flowChild.getAttribute("name"));
         }
-        
+       
         System.out.print(mainNode.getAttribute("name"));
         System.out.print("-FLOW(");
-        System.out.print(childrenNames.get(0));
+        System.out.print(first.getAttribute("name"));
         System.out.print(",");
-        System.out.print(n.get(0));
+        System.out.print(flowChNames.get(0));
         System.out.print(",");
-        System.out.print(n.get(1));
+        System.out.print(flowChNames.get(1));
         System.out.print(")");
         System.out.println();
         

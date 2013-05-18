@@ -21,7 +21,7 @@ public class Generator {
         _designPatterns = new ArrayList<>();
     }
     
-    //metoda uruchamiająca rekurencyjne przeszukiwanie drzewa XML, zwraca drzewo wzorców
+    //metoda uruchamiająca rekurencyjne przeszukiwanie drzewa XML, zwraca liste znalezionych wzorcow
     public List<BaseDesignPattern> Scan() {
         this.searchTree(_doc.getDocumentElement(), 0);
         return _designPatterns;
@@ -48,6 +48,7 @@ public class Generator {
         }
     }
     
+    //metoda usuwajaca potomne galezie, ktore nie sa typu Element (np. rozpoznane biale znaki)
     private Element RemoveUnproperChildren(Element mainNode) {
         NodeList nodes = mainNode.getChildNodes();
         for (int i = 0; i < nodes.getLength(); i++){
