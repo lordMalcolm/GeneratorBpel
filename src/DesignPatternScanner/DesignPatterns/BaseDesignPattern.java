@@ -18,6 +18,15 @@ public abstract class BaseDesignPattern {
 
     public BaseDesignPattern() {
         Arguments = new ArrayList<>();
+        NestedPatterns = new ArrayList<>();
+    }
+    public void Print(StringBuilder sb) {
+        sb.append(Type.toString());
+        sb.append("(");
+        for(int i = 0; i < NestedPatterns.size(); i++){
+            NestedPatterns.get(i).Print(sb);
+        }
+        sb.append(")");
     }
     
     public String ToString() {
@@ -41,7 +50,7 @@ public abstract class BaseDesignPattern {
         String result =  new String(sb);
         return result;
     }
-        
+           
     protected Element GetNodeAsElement(NodeList nodes, int i) {
         Node child = nodes.item(i);
         if (child.getNodeType() != Node.ELEMENT_NODE)
@@ -72,4 +81,5 @@ public abstract class BaseDesignPattern {
     public void Process(Element mainNode) {
     
     }   
+
 }

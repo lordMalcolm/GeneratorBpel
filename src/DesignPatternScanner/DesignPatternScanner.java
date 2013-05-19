@@ -21,6 +21,9 @@ public class DesignPatternScanner {
         
         //tutaj kolejność jest ważna (niestety), może da się inaczej, narazie flow musi bys sprawdzony przed sequencem
         //a wynika to z tego że flow jest zagnieżdżony w sequence (tak jest w podanych wzorcach i powiązanych z nimi wyrażeniami logicznymi)
+        if(CheckIfWhile(mainNode))
+            return DesignPatternType.While;
+        
         if (CheckIfFlow(mainNode))
             return DesignPatternType.Flow;
      
@@ -30,7 +33,8 @@ public class DesignPatternScanner {
         if (CheckIfSequence(mainNode))
             return DesignPatternType.Sequence;
         
-        return null;
+        return DesignPatternType.Atomic;
+//        return null;
     }
     
     private boolean CheckIfFlow(Element node) {
@@ -60,4 +64,13 @@ public class DesignPatternScanner {
             return true;
         return false;
     }    
+
+    private boolean CheckIfWhile(Element node) {
+        if(node.getChildNodes().getLength() != 1)
+            return false;
+        
+        if(node.getNodeName().equals("switch"))
+            return true;
+        return false;
+    }
 }

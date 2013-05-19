@@ -23,13 +23,17 @@ public class Generator {
     
     //metoda uruchamiająca rekurencyjne przeszukiwanie drzewa XML, zwraca liste znalezionych wzorcow
     //docelowo powinna być zwracana struktura drzewiasta, będzie się lepiej dalej interpretowało
+    public BaseDesignPattern GetTree() {
+        BaseDesignPattern main = this.searchTree(_doc.getDocumentElement(), 0);
+        return main;
+    }
     public List<BaseDesignPattern> Scan() {
         this.searchTree(_doc.getDocumentElement(), 0);
         return _designPatterns;
     }
     
     //rekurencyjna metoda przeszukiwania podanej gałęzi
-    private void searchTree(Element node, int deepLevel) {
+    private BaseDesignPattern searchTree(Element node, int deepLevel) {
         
         node = RemoveUnproperChildren(node);
         NodeList nodeList = node.getChildNodes();
@@ -43,10 +47,15 @@ public class Generator {
         
         for (int i = 0; i < nodeList.getLength(); i++) {
             Element child = (Element) nodeList.item(i);
+            BaseDesignPattern tmp = null;
             
             if (child.getNodeType() == Node.ELEMENT_NODE)
-                searchTree(child, deepLevel+1);
+                tmp = searchTree(child, deepLevel+1);
+            
+            if (pattern != null && tmp != null)
+                pattern.NestedPatterns.add(tmp);
         }
+        return pattern;
     }
     
     //metoda usuwajaca potomne galezie, ktore nie sa typu Element (np. rozpoznane biale znaki)

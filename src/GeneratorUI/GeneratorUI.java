@@ -41,11 +41,17 @@ public class GeneratorUI {
 
         Generator generator = new Generator(_designPatternScanner, document);        
         List<BaseDesignPattern> designPatterns = generator.Scan();
+        
         System.out.println();
         for (Iterator<BaseDesignPattern> it = designPatterns.iterator(); it.hasNext();) {
             BaseDesignPattern dp = it.next();
             System.out.println(dp.ToString());
-        }        
+        }
+        
+        BaseDesignPattern top = generator.GetTree();
+        StringBuilder sb = new StringBuilder();
+        top.Print(sb);
+        System.out.println(sb.toString());
     }
     
     private static void Initialize() throws ParserConfigurationException, SAXException, IOException {

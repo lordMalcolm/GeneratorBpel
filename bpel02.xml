@@ -2,7 +2,7 @@
   
   <sequence name="FLO-1">
 	<action name="a" />
-	<flow>  
+	<flow name="flow">  
 	  
 	  <sequence name="SEQ-1">
 		<action name="b" />
