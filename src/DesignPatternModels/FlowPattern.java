@@ -13,18 +13,22 @@ public class FlowPattern extends BaseDesignPattern {
         NodeList children = mainNode.getChildNodes();
         Element first = (Element) children.item(0);
         Element flow = (Element) children.item(1);
-        List<Element> flowChildren = GetProperChildrenAsElements(flow);
-        List<String> flowChNames = new ArrayList<>();
+        List<String> childrenNames = new ArrayList<>();
         
-        for(int i = 0; i < flowChildren.size(); i++){
-            Element flowChild = (Element) flowChildren.get(i);
-            flowChNames.add(flowChild.getAttribute("name"));
+        childNodes.add(first);
+        
+        NodeList flowChildren = flow.getChildNodes();
+        for(int i = 0; i < flowChildren.getLength(); i++){
+            Element flowChild = (Element) flowChildren.item(i);
+            childrenNames.add(flowChild.getAttribute("name"));
+            childNodes.add(flowChild);
         }
 
-        this.Type = DesignPatternType.Flow;
-        this.Name = mainNode.getAttribute("name");
-        this.Arguments.add(first.getAttribute("name"));
-        this.Arguments.add(flowChNames.get(0));
-        this.Arguments.add(flowChNames.get(1));
+        this.type = DesignPatternType.Flow;
+        this.name = mainNode.getAttribute("name");
+        
+        this.arguments.add(first.getAttribute("name"));
+        this.arguments.add(childrenNames.get(0));
+        this.arguments.add(childrenNames.get(1));
     }
 }

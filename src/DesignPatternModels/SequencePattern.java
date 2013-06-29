@@ -9,9 +9,12 @@ public class SequencePattern extends BaseDesignPattern {
         Element child1 = (Element) mainNode.getChildNodes().item(0);
         Element child2 = (Element) mainNode.getChildNodes().item(1);
 
-       this.Type = DesignPatternType.Sequence;
-       this.Name = mainNode.getAttribute("name");
-       this.Arguments.add(child1.getAttribute("name"));
-       this.Arguments.add(child2.getAttribute("name"));
+       this.type = DesignPatternType.Sequence;
+       this.name = mainNode.getAttribute("name");
+       this.arguments.add(child1.getAttribute("name"));
+       this.arguments.add(child2.getAttribute("name"));
+       
+       this.childNodes.add(child1);
+       this.childNodes.add(child2);
     }
 }

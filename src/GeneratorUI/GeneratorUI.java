@@ -29,7 +29,7 @@ public class GeneratorUI extends JPanel
 
         //Create the log first, because the action listeners
         //need to refer to it.
-        log = new JTextArea(5,20);
+        log = new JTextArea(20,20);
         log.setMargin(new Insets(5,5,5,5));
         log.setEditable(false);
         JScrollPane logScrollPane = new JScrollPane(log);
@@ -108,8 +108,9 @@ public class GeneratorUI extends JPanel
     private void run(){
 	try{
             IGenerator generator = new Generator(inputFilePath, outputFilePath + outputFileName);
-            generator.run();
+            String out = generator.run();
             log.append("Generowanie pliku zakończyło się sukcesem." + newline);
+            log.append(out + newline);
         } catch(Exception ex){
             log.append(ex.getMessage());
         }

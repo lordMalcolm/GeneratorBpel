@@ -1,30 +1,29 @@
 package DesignPatternModels;
 
-import java.util.ArrayList;
-import java.util.List;
 import org.w3c.dom.Element;
+import org.w3c.dom.NodeList;
 
 public class SwitchPattern extends BaseDesignPattern{
     
     @Override
-    public void Process(Element mainNode) {
-               
-        List<Element> properChildren = this.GetProperChildrenAsElements(mainNode);
-        List<String> childrenNames = this.GetChildrenNames(properChildren);
-        List<String> n = new ArrayList<>();
+    public void Process(Element mainNode) {       
+        NodeList children = mainNode.getChildNodes();
+        Element casePart = (Element) children.item(0);
+        Element otherwisePart = (Element) children.item(1);
         
-        for (Element element : properChildren) {
-            List<Element> nestedChildren = GetProperChildrenAsElements(element);
-            for(Element nested: nestedChildren){
-                n.add(nested.getAttribute("name"));
-            }
-        }
+        Element casePartChild = (Element) casePart.getChildNodes().item(0);
+        Element otherwisePartChild = (Element) otherwisePart.getChildNodes().item(0);
+        childNodes.add(casePart);
+        childNodes.add(casePartChild);
+        childNodes.add(otherwisePartChild);
         
-        this.Type = DesignPatternType.Switch;
-        this.Name = mainNode.getAttribute("name");
-        this.Arguments.add(childrenNames.get(0));
-        this.Arguments.add(n.get(0));
-        this.Arguments.add(n.get(1));
+        type = DesignPatternType.Switch;
+        name = mainNode.getAttribute("name");
+        
+        arguments.add(casePart.getAttribute("name"));
+        arguments.add(casePartChild.getAttribute("name"));
+        arguments.add(otherwisePartChild.getAttribute("name"));
+
         
     }
 }

@@ -1,46 +1,54 @@
 package DesignPatternModels;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import org.w3c.dom.Element;
-import org.w3c.dom.Node;
-import org.w3c.dom.NodeList;
 
 //klasa przechowujaca informacje o danym wzorcu
 public abstract class BaseDesignPattern {
-    public DesignPatternType Type;
-    public String Name;
-    public List<String> Arguments;
-    public List<BaseDesignPattern> NestedPatterns;
-    public int DeepLevel;
+    public DesignPatternType type;
+    public String name;
+    public List<Element> childNodes;
+    public List<String> arguments;
+    public List<BaseDesignPattern> nestedPatterns;
+    public int deepLevel;
 
     public BaseDesignPattern() {
-        Arguments = new ArrayList<>();
-        NestedPatterns = new ArrayList<>();
+        arguments = new ArrayList<>();
+        nestedPatterns = new ArrayList<>();
+        childNodes = new ArrayList<>();
     }
     public void Print(StringBuilder sb) {
-        sb.append(Type.toString());
+        for (int i = 0; i < deepLevel; i++) {
+            sb.append("   ");
+        }
+        sb.append(type.toString());
+        sb.append("-").append(name);
         sb.append("(");
-        for(int i = 0; i < NestedPatterns.size(); i++){
-            NestedPatterns.get(i).Print(sb);
+        sb.append(System.getProperty("line.separator"));
+        for(int i = 0; i < nestedPatterns.size(); i++){
+            nestedPatterns.get(i).Print(sb);
+            sb.append(System.getProperty("line.separator"));
+        }
+        for (int i = 0; i < deepLevel; i++) {
+            sb.append("   ");
         }
         sb.append(")");
     }
     
     public String ToString() {
         StringBuilder sb = new StringBuilder();
-        if (Name != null) {
+        if (name != null) {
             sb.append(" name: ");
-            sb.append(Name);
+            sb.append(name);
         }
-        if (Type != null) {
+        if (type != null) {
             sb.append(", typ: ");
-            sb.append(Type.toString());
+            sb.append(type.toString());
         }
-        if(Arguments != null) {
+        if(arguments != null) {
             sb.append(", argumenty: ");
-            for(String s: Arguments){
+            for(String s: arguments){
                 sb.append(s);
                 sb.append(", ");
             }
@@ -49,36 +57,7 @@ public abstract class BaseDesignPattern {
         String result =  new String(sb);
         return result;
     }
-           
-    protected Element GetNodeAsElement(NodeList nodes, int i) {
-        Node child = nodes.item(i);
-        if (child.getNodeType() != Node.ELEMENT_NODE)
-            return null;
-        return (Element) child;   
-    }
 
-    protected List<Element> GetProperChildrenAsElements(Element parentNode) {
-        NodeList nodes = parentNode.getChildNodes();
-        List<Element> result = new ArrayList<>();
-        for (int i = 0; i < nodes.getLength(); i++) {
-            Element castedChild = this.GetNodeAsElement(nodes, i);
-            if (castedChild != null)
-                result.add(castedChild);
-        }
-        return result;
-    }
-
-    protected List<String> GetChildrenNames(List<Element> properChildren) {
-        List<String> result = new ArrayList<>();
-        for (Iterator<Element> it = properChildren.iterator(); it.hasNext();) {
-            Element e = it.next();
-            result.add(e.getAttribute("name"));
-        }
-        return result;
-    }
-
-    public void Process(Element mainNode) {
-    
-    }   
+    abstract public void Process(Element mainNode);
 
 }

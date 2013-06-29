@@ -36,7 +36,6 @@ public class DesignPatternScanner implements IDesignPatternScanner{
             return DesignPatternType.Sequence;
         
         return DesignPatternType.Atomic;
-//        return null;
     }
     
     private boolean CheckIfFlow(Element node) {

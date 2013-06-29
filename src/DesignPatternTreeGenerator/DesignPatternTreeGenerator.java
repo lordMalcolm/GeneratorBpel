@@ -5,7 +5,6 @@ import DesignPatternModels.BaseDesignPattern;
 import DesignPatternScanner.IDesignPatternScanner;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-import org.w3c.dom.NodeList;
 
 public class DesignPatternTreeGenerator implements IDesignPatternTreeGenerator{
     
@@ -24,14 +23,18 @@ public class DesignPatternTreeGenerator implements IDesignPatternTreeGenerator{
 
     //rekurencyjna metoda przeszukiwania podanej gałęzi
     private BaseDesignPattern searchTree(Element node, int deepLevel) {
-        NodeList nodeList = node.getChildNodes();
+        //pobieranie rozpoznanego wzorca, a powinien zostać jakiś rozpoznany
         BaseDesignPattern pattern = designPatternScanner.getDesignPatternIfAny(node);
-        for (int i = 0; i < nodeList.getLength(); i++) {
-            Element child = (Element) nodeList.item(i);
+        pattern.deepLevel = deepLevel;
+        //ponieważ wzorce są zagnieżdżane na różnych poziomach podczas tworzenia wzorca
+        //dodawane są potomne gałęzie i wg nich następuje dalsze przeszukiwanie drzewa
+        for (int i = 0; i < pattern.childNodes.size(); i++) {
+            Element child = (Element) pattern.childNodes.get(i);
             BaseDesignPattern tmp = searchTree(child, deepLevel+1);
             
             if (pattern != null && tmp != null)
-                pattern.NestedPatterns.add(tmp);
+                pattern.nestedPatterns.add(tmp);
+            
         }
         return pattern;
     }

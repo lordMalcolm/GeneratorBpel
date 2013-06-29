@@ -1,0 +1,8 @@
+
+		<sequence name="F">
+			<action name="a" />
+			<flow name="nazwa">  
+				<action name="b" />
+				<action name="c" />
+			</flow>
+		</sequence>

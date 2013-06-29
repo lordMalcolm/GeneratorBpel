@@ -27,13 +27,19 @@ public class Generator implements IGenerator{
     }
     
     @Override
-    public void run() throws Exception {
+    public String run() throws Exception {
         
         document = readFile(inputFilePath);
         checkModel();
         designPatternTree = getDesignPatternTree();
         
-        System.out.println("ok");
+        System.out.println(designPatternTree.name);
+        System.out.println(designPatternTree.arguments.size());
+        System.out.println(designPatternTree.nestedPatterns.size());
+        
+        StringBuilder sb = new StringBuilder();
+        designPatternTree.Print(sb);
+        return sb.toString();
     }
 
     

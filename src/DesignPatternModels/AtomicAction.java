@@ -6,15 +6,18 @@ public class AtomicAction extends BaseDesignPattern {
     
     @Override
     public void Process(Element mainNode) {
-       this.Type = DesignPatternType.Atomic;
-       this.Name = mainNode.getAttribute("name");
+       this.type = DesignPatternType.Atomic;
+       this.name = mainNode.getAttribute("name");
     }
     
     @Override
     public void Print(StringBuilder sb) {
-        sb.append(Type.toString());
+        for (int i = 0; i < deepLevel; i++) {
+            sb.append("   ");
+        }
+        sb.append(type.toString());
         sb.append("(");
-        sb.append(Name);
+        sb.append(name);
         sb.append(")");
     }
 }
