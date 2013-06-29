@@ -35,6 +35,9 @@ public class DesignPatternScanner implements IDesignPatternScanner{
         if (CheckIfSequence(mainNode))
             return DesignPatternType.Sequence;
         
+        if (CheckIfSeqSeq(mainNode))
+            return DesignPatternType.SeqSeq;
+        
         return DesignPatternType.Atomic;
     }
     
@@ -61,6 +64,9 @@ public class DesignPatternScanner implements IDesignPatternScanner{
         if(node.getChildNodes().getLength() != 2)
             return false;
         
+        if(node.getChildNodes().item(1).getNodeName().equals("flow"))
+            return false;
+        
         if(node.getNodeName().equals("sequence"))
             return true;
         return false;
@@ -72,6 +78,16 @@ public class DesignPatternScanner implements IDesignPatternScanner{
         
         if(node.getNodeName().equals("switch"))
             return true;
+        return false;
+    }
+    
+    private boolean CheckIfSeqSeq(Element node) {
+        if (node.getChildNodes().getLength() != 3)
+            return false;
+        
+        if(node.getNodeName().equals("sequence"))
+            return true;
+        
         return false;
     }
 }

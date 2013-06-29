@@ -4,6 +4,7 @@ import DesignPatternModels.DesignPatternType;
 import DesignPatternModels.AtomicAction;
 import DesignPatternModels.BaseDesignPattern;
 import DesignPatternModels.FlowPattern;
+import DesignPatternModels.SeqSeqPattern;
 import DesignPatternModels.SequencePattern;
 import DesignPatternModels.SwitchPattern;
 import DesignPatternModels.WhilePattern;
@@ -19,6 +20,8 @@ public class DesignPatternFactory {
                 return new SequencePattern();         
             case While:
                 return new WhilePattern();
+            case SeqSeq:
+                return new SeqSeqPattern();
             case Atomic:
                 return new AtomicAction();
         }

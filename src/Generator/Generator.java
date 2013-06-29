@@ -33,10 +33,6 @@ public class Generator implements IGenerator{
         checkModel();
         designPatternTree = getDesignPatternTree();
         
-        System.out.println(designPatternTree.name);
-        System.out.println(designPatternTree.arguments.size());
-        System.out.println(designPatternTree.nestedPatterns.size());
-        
         StringBuilder sb = new StringBuilder();
         designPatternTree.Print(sb);
         return sb.toString();
