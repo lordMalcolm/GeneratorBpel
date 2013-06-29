@@ -1,6 +1,5 @@
-package DesignPatternScanner.DesignPatterns;
+package DesignPatternModels;
 
-import DesignPatternScanner.DesignPatternType;
 import org.w3c.dom.Element;
 
 public class AtomicAction extends BaseDesignPattern {

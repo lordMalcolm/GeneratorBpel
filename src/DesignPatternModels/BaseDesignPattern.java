@@ -1,6 +1,5 @@
-package DesignPatternScanner.DesignPatterns;
+package DesignPatternModels;
 
-import DesignPatternScanner.DesignPatternType;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;

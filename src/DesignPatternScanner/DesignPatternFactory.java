@@ -1,11 +1,12 @@
 package DesignPatternScanner;
 
-import DesignPatternScanner.DesignPatterns.AtomicAction;
-import DesignPatternScanner.DesignPatterns.BaseDesignPattern;
-import DesignPatternScanner.DesignPatterns.FlowPattern;
-import DesignPatternScanner.DesignPatterns.SequencePattern;
-import DesignPatternScanner.DesignPatterns.SwitchPattern;
-import DesignPatternScanner.DesignPatterns.WhilePattern;
+import DesignPatternModels.DesignPatternType;
+import DesignPatternModels.AtomicAction;
+import DesignPatternModels.BaseDesignPattern;
+import DesignPatternModels.FlowPattern;
+import DesignPatternModels.SequencePattern;
+import DesignPatternModels.SwitchPattern;
+import DesignPatternModels.WhilePattern;
 
 public class DesignPatternFactory {
     public static BaseDesignPattern CreatePattern(DesignPatternType type){

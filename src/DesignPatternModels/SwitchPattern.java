@@ -1,6 +1,5 @@
-package DesignPatternScanner.DesignPatterns;
+package DesignPatternModels;
 
-import DesignPatternScanner.DesignPatternType;
 import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Element;

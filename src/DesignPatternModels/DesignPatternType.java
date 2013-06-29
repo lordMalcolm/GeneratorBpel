@@ -1,4 +1,4 @@
-package DesignPatternScanner;
+package DesignPatternModels;
 
 //enum obslugiwanych wzorcow procesowych
 public enum DesignPatternType {
