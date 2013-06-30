@@ -12,9 +12,6 @@ public class SeqSeqPattern extends BaseDesignPattern {
 
        this.designPatternType = DesignPatternType.SeqSeq;
        this.name = mainNode.getAttribute("name");
-       this.arguments.add(child1.getAttribute("name"));
-       this.arguments.add(child2.getAttribute("name"));
-       this.arguments.add(child3.getAttribute("name"));
        
        this.childNodes.add(child1);
        this.childNodes.add(child2);

@@ -11,8 +11,6 @@ public class SequencePattern extends BaseDesignPattern {
 
        this.designPatternType = DesignPatternType.Sequence;
        this.name = mainNode.getAttribute("name");
-       this.arguments.add(child1.getAttribute("name"));
-       this.arguments.add(child2.getAttribute("name"));
        
        this.childNodes.add(child1);
        this.childNodes.add(child2);

@@ -9,10 +9,8 @@ public abstract class LogicalExpression implements ILogicalExpression {
     public String name;
     public int deepLevel;
     public List<Element> childNodes;
-    public List<LogicalExpression> nestedPatterns;
     
-    public LogicalExpression(){
-        nestedPatterns = new ArrayList<>();
+    public LogicalExpression() {
         childNodes = new ArrayList<>();
     }
 }

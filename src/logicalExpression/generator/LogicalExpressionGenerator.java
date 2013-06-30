@@ -2,6 +2,8 @@ package logicalExpression.generator;
 
 import generatorUI.Log;
 import logicalExpression.LogicalExpression;
+import logicalExpression.LogicalExpressionType;
+import logicalExpression.designPattern.BaseDesignPattern;
 import logicalExpression.scanner.ILogicalExpressionScanner;
 import logicalExpression.scanner.LogicalExpressionScanner;
 import org.w3c.dom.Document;
@@ -19,9 +21,7 @@ public class LogicalExpressionGenerator implements ILogicalExpressionGenerator{
     
     @Override
     public LogicalExpression generateLogicalExpression(Document document) {
-        Element root = document.getDocumentElement();
-        LogicalExpression mainLogicalExpression = this.searchTree(root, 0);
-        return mainLogicalExpression;
+        return searchTree(document.getDocumentElement(), 0);
     }   
 
     //rekurencyjna metoda przeszukiwania podanej gałęzi
@@ -29,16 +29,19 @@ public class LogicalExpressionGenerator implements ILogicalExpressionGenerator{
         
         LogicalExpression expression = logicalExpressionScanner.getLogicalExpression(node);
         expression.deepLevel = deepLevel;
-        
-        for (int i = 0; i < expression.childNodes.size(); i++) {
-            Element child = (Element) expression.childNodes.get(i);
+        for (Element child : expression.childNodes) {
+            
+            //przeszukiwanie kolejnych zagnieżdżonych gałęzi
             LogicalExpression tmp = searchTree(child, deepLevel+1);
             
-            if (expression != null && tmp != null)
-                expression.nestedPatterns.add(tmp);
-            
+            //jeżeli aktualne wyrażenie jest wzorcem dodawane są jego argumenty
+            if (tmp != null && expression.logicalExpressionType == LogicalExpressionType.DesignPattern) {
+                BaseDesignPattern base = (BaseDesignPattern) expression;
+                base.nestedPatterns.add(tmp);
+            }
         }
-        log.append("Poprawnie rozpoznano " + expression.logicalExpressionType.toString() + " " + expression.getSpecificType());
+        
+        log.append("rozpoznano " + expression.logicalExpressionType.toString() + " " + expression.getSpecificType());
         return expression;
     }
 }

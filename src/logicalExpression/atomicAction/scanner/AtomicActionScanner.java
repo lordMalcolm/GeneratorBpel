@@ -15,8 +15,11 @@ public class AtomicActionScanner implements IAtomicActionScanner {
             return null;
         
         AtomicAction action = ActionFactory.CreateAction(type);
+        if (action == null)
+            return null;
+        
         action.actionType = type;
-        action.Process(node);
+        action.process(node);
         return action;
     }
     
@@ -26,6 +29,9 @@ public class AtomicActionScanner implements IAtomicActionScanner {
         
         if(checkIfReceive(mainNode))
             return ActionType.Receive;
+        
+        if(checkIfCondition(mainNode))
+            return ActionType.Condition;
         
         return ActionType.Unknown;
 
@@ -40,6 +46,13 @@ public class AtomicActionScanner implements IAtomicActionScanner {
 
     private boolean checkIfInvoke(Element node) {
         if(node.getNodeName().equals("invoke"))
+            return true;
+        
+        return false;
+    }
+
+    private boolean checkIfCondition(Element node) {
+        if(!node.getAttribute("condition").isEmpty())
             return true;
         
         return false;

@@ -15,7 +15,7 @@
 	  </sequence>
 	
 	  <switch name="SWI-1">
-		<case name="boolExpr-d">
+		<case condition="boolExpr-d">
 		  <action name="e" />
 		</case>
 		<otherwise>
@@ -27,7 +27,7 @@
   </sequence>
  
   <switch name="SWI-3">
-	<case name="boolExpr-g">
+	<case condition="boolExpr-g">
 	  <action name="h" />
 	</case>
 	<otherwise>
@@ -35,7 +35,7 @@
 	</otherwise>
   </switch>
   
-  <while name="WH-1">
+  <while condition="WH-1">
 	<sequence name="SEQ-3">
 	  <action name="k" />
 	  <action name="l" />

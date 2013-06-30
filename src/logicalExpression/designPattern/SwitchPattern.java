@@ -18,12 +18,6 @@ public class SwitchPattern extends BaseDesignPattern{
         childNodes.add(otherwisePartChild);
         
         designPatternType = DesignPatternType.Switch;
-        name = mainNode.getAttribute("name");
-        
-        arguments.add(casePart.getAttribute("name"));
-        arguments.add(casePartChild.getAttribute("name"));
-        arguments.add(otherwisePartChild.getAttribute("name"));
-
-        
+        name = mainNode.getAttribute("name");        
     }
 }

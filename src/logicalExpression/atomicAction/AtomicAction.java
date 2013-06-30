@@ -8,7 +8,8 @@ public class AtomicAction extends LogicalExpression {
     
     public ActionType actionType;
     
-    public void Process(Element mainNode) {
+    @Override
+    public void process(Element mainNode) {
        logicalExpressionType = LogicalExpressionType.AtomicAction;
        name = mainNode.getAttribute("name");
     }
@@ -18,17 +19,6 @@ public class AtomicAction extends LogicalExpression {
         StringBuilder sb = new StringBuilder();
         sb.append(name);
         return sb;
-    }
-    
-    @Override
-    public void print(StringBuilder sb) {
-        for (int i = 0; i < deepLevel; i++) {
-            sb.append("   ");
-        }
-        sb.append(actionType.toString());
-        sb.append("(");
-        sb.append(name);
-        sb.append(")");
     }
 
     @Override

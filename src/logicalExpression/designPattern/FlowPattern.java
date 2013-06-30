@@ -26,9 +26,5 @@ public class FlowPattern extends BaseDesignPattern {
 
         this.designPatternType = DesignPatternType.Flow;
         this.name = mainNode.getAttribute("name");
-        
-        this.arguments.add(first.getAttribute("name"));
-        this.arguments.add(childrenNames.get(0));
-        this.arguments.add(childrenNames.get(1));
     }
 }
