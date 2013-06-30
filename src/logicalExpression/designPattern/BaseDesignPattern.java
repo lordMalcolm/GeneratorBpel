@@ -3,14 +3,15 @@ package logicalExpression.designPattern;
 import logicalExpression.LogicalExpression;
 import java.util.ArrayList;
 import java.util.List;
+import logicalExpression.LogicalExpressionType;
 
-//klasa przechowujaca informacje o danym wzorcu
 public abstract class BaseDesignPattern extends LogicalExpression {
     public DesignPatternType designPatternType;
     public List<LogicalExpression> nestedPatterns;
     
     public BaseDesignPattern() {
         nestedPatterns = new ArrayList<>();
+        logicalExpressionType = LogicalExpressionType.DesignPattern;
     }
     
     @Override

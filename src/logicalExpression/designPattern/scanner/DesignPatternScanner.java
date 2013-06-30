@@ -1,6 +1,4 @@
 package logicalExpression.designPattern.scanner;
-
-import logicalExpression.LogicalExpressionType;
 import logicalExpression.designPattern.DesignPatternType;
 import logicalExpression.designPattern.BaseDesignPattern;
 import org.w3c.dom.Element;
@@ -11,21 +9,19 @@ public class DesignPatternScanner implements IDesignPatternScanner{
     @Override
     public BaseDesignPattern getDesignPatternIfAny(Element node) {
         DesignPatternType type = getPatternType(node);
-        
+        //możliwe jest nierozpoznanie wzorca
         if (type == null)
             return null;
         
-        BaseDesignPattern pattern = DesignPatternFactory.CreatePattern(type);
-        pattern.logicalExpressionType = LogicalExpressionType.DesignPattern;
-        pattern.designPatternType = type;
-        pattern.process(node);
-        return pattern;
+        return DesignPatternFactory.CreatePattern(type, node);
     }
     
     private DesignPatternType getPatternType(Element mainNode) {
         
-        //tutaj kolejność jest ważna (niestety), może da się inaczej, narazie flow musi bys sprawdzony przed sequencem
-        //a wynika to z tego że flow jest zagnieżdżony w sequence (tak jest w podanych wzorcach i powiązanych z nimi wyrażeniami logicznymi)
+        //tutaj kolejność jest ważna (niestety), może da się inaczej
+        //narazie flow musi bys sprawdzony przed sequencem
+        //a wynika to z tego że flow jest zagnieżdżony w sequence
+        //(tak jest w podanych wzorcach i powiązanych z nimi wyrażeniami logicznymi)
         if(checkIfWhile(mainNode))
             return DesignPatternType.While;
         

@@ -7,8 +7,7 @@ import org.w3c.dom.NodeList;
 
 public class FlowPattern extends BaseDesignPattern {
     
-    @Override
-    public void process(Element mainNode) {
+    public FlowPattern(Element mainNode) {
         
         NodeList children = mainNode.getChildNodes();
         Element first = (Element) children.item(0);
@@ -23,7 +22,7 @@ public class FlowPattern extends BaseDesignPattern {
             childrenNames.add(flowChild.getAttribute("name"));
             childNodes.add(flowChild);
         }
-
+        
         this.designPatternType = DesignPatternType.Flow;
         this.name = mainNode.getAttribute("name");
     }

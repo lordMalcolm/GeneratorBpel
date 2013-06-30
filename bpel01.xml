@@ -2,27 +2,27 @@
 	<sequence name="S1">
 	
 		<sequence name="F">
-			<action name="a" />
+			<invoke name="a" />
 			<flow>  
-				<action name="b" />
-				<action name="c" />
+				<receive name="b" />
+				<invoke name="c" />
 			</flow>
 		</sequence>
 
 		<switch name="SW">
-			<case name="boolExpr-d">
-				<action name="e" />
+			<case condition="boolExpr-d">
+				<invoke name="e" />
 			 </case>
 			<otherwise>
-				<action name="f" />
+				<receive name="f" />
 			</otherwise>
 		</switch>
 
 	</sequence>
 	
 	<sequence name="S1">
-		<action name="g" />
-		<action name="h" />
+		<invoke name="g" />
+		<receive name="h" />
 	</sequence>
 
 </sequence>

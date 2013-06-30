@@ -3,6 +3,8 @@ package logicalExpression.generator;
 import generatorUI.Log;
 import logicalExpression.LogicalExpression;
 import logicalExpression.LogicalExpressionType;
+import logicalExpression.atomicAction.ActionType;
+import logicalExpression.atomicAction.AtomicAction;
 import logicalExpression.designPattern.BaseDesignPattern;
 import logicalExpression.scanner.ILogicalExpressionScanner;
 import logicalExpression.scanner.LogicalExpressionScanner;
@@ -28,6 +30,7 @@ public class LogicalExpressionGenerator implements ILogicalExpressionGenerator{
     private LogicalExpression searchTree(Element node, int deepLevel) {
         
         LogicalExpression expression = logicalExpressionScanner.getLogicalExpression(node);
+        LogExpressionRecognitionStatus(expression);
         expression.deepLevel = deepLevel;
         for (Element child : expression.childNodes) {
             
@@ -39,9 +42,24 @@ public class LogicalExpressionGenerator implements ILogicalExpressionGenerator{
                 BaseDesignPattern base = (BaseDesignPattern) expression;
                 base.nestedPatterns.add(tmp);
             }
+        }       
+        return expression;
+    }
+
+    private void LogExpressionRecognitionStatus(LogicalExpression expression) {
+        
+        if (expression.logicalExpressionType == LogicalExpressionType.DesignPattern) {
+            log.append("rozpoznano wzorzec: " + expression.getSpecificType());
+            return;
         }
         
-        log.append("rozpoznano " + expression.logicalExpressionType.toString() + " " + expression.getSpecificType());
-        return expression;
+        AtomicAction action = (AtomicAction) expression;
+        if (action.actionType == ActionType.Unknown) {
+            log.append("nie rozpoznano aktywności");
+        }
+        else {
+            log.append("rozpoznano aktywność: " + expression.getSpecificType());
+        }
+        
     }
 }

@@ -34,8 +34,8 @@ public class Generator implements IGenerator{
     public String run() throws Exception {
         document = readFile(inputFilePath);
         checkModel();
-        logicalExpression = getLogicalExpression();
         
+        logicalExpression = getLogicalExpression();
         StringBuilder sb = logicalExpression.printLogicalExpression();
         
         return sb.toString();
@@ -46,7 +46,6 @@ public class Generator implements IGenerator{
         log.append("Wczytywanie pliku.");
         DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
         DocumentBuilder db = dbf.newDocumentBuilder();
-        
         File file = new File(filePath);
         Document result = db.parse(file);
         log.append("Wykonano.");

@@ -1,5 +1,4 @@
 package logicalExpression.atomicAction.scanner;
-
 import logicalExpression.atomicAction.ActionType;
 import logicalExpression.atomicAction.AtomicAction;
 import org.w3c.dom.Element;
@@ -10,17 +9,7 @@ public class AtomicActionScanner implements IAtomicActionScanner {
     @Override
     public AtomicAction getActionIfAny(Element node) {
         ActionType type = getActionType(node);
-        
-        if (type == null)
-            return null;
-        
-        AtomicAction action = ActionFactory.CreateAction(type);
-        if (action == null)
-            return null;
-        
-        action.actionType = type;
-        action.process(node);
-        return action;
+        return ActionFactory.CreateAction(type, node);
     }
     
     private ActionType getActionType(Element mainNode) {
@@ -34,7 +23,6 @@ public class AtomicActionScanner implements IAtomicActionScanner {
             return ActionType.Condition;
         
         return ActionType.Unknown;
-
     }
     
     private boolean checkIfReceive(Element node) {
@@ -57,5 +45,4 @@ public class AtomicActionScanner implements IAtomicActionScanner {
         
         return false;
     }
-    
 }

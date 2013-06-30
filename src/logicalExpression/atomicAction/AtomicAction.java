@@ -2,16 +2,14 @@ package logicalExpression.atomicAction;
 
 import logicalExpression.LogicalExpression;
 import logicalExpression.LogicalExpressionType;
-import org.w3c.dom.Element;
 
 public class AtomicAction extends LogicalExpression {
     
     public ActionType actionType;
-    
-    @Override
-    public void process(Element mainNode) {
-       logicalExpressionType = LogicalExpressionType.AtomicAction;
-       name = mainNode.getAttribute("name");
+
+    public AtomicAction() {
+        actionType = ActionType.Unknown;
+        logicalExpressionType = LogicalExpressionType.AtomicAction;
     }
     
     @Override

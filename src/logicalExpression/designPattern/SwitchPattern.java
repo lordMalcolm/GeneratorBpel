@@ -5,8 +5,7 @@ import org.w3c.dom.NodeList;
 
 public class SwitchPattern extends BaseDesignPattern{
     
-    @Override
-    public void process(Element mainNode) {       
+    public SwitchPattern(Element mainNode) {       
         NodeList children = mainNode.getChildNodes();
         Element casePart = (Element) children.item(0);
         Element otherwisePart = (Element) children.item(1);

@@ -1,8 +1,6 @@
 package logicalExpression.scanner;
-
 import logicalExpression.designPattern.scanner.IDesignPatternScanner;
 import logicalExpression.designPattern.scanner.DesignPatternScanner;
-import logicalExpression.atomicAction.AtomicAction;
 import logicalExpression.atomicAction.scanner.AtomicActionScanner;
 import logicalExpression.atomicAction.scanner.IAtomicActionScanner;
 import logicalExpression.designPattern.BaseDesignPattern;
@@ -22,15 +20,11 @@ public class LogicalExpressionScanner implements ILogicalExpressionScanner{
     
     @Override
     public LogicalExpression getLogicalExpression(Element node) {
-        
+        //próba rozpoznania wzorca
         BaseDesignPattern pattern = designPatternScanner.getDesignPatternIfAny(node);
         if (pattern != null)
             return pattern;
-        
-        AtomicAction action = atomicActionScanner.getActionIfAny(node);
-        if (action != null)
-            return action;
-        
-        return null;
+        //jak nie wzorzec to zwracana zostaje aktywność (może być "Unknown")
+        return atomicActionScanner.getActionIfAny(node);
     }
 }

@@ -5,14 +5,12 @@ import org.w3c.dom.Element;
 
 public class WhilePattern extends BaseDesignPattern{
     
-    @Override
-    public void process(Element mainNode) {
+    public WhilePattern(Element mainNode) {
         Element child = (Element) mainNode.getChildNodes().item(0);
         designPatternType = DesignPatternType.While;
         name = mainNode.getAttribute("name");
         
-        ConditionAction whileCondition = new ConditionAction();
-        whileCondition.process(mainNode);
+        ConditionAction whileCondition = new ConditionAction(mainNode);
         
         nestedPatterns.add(whileCondition);
         childNodes.add(child);
