@@ -1,4 +1,4 @@
-package DesignPatternModels;
+package LogicalExpression.DesignPattern;
 
 import java.util.ArrayList;
 import java.util.List;

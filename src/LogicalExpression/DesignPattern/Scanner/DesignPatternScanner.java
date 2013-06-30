@@ -1,7 +1,7 @@
-package DesignPatternScanner;
+package LogicalExpression.DesignPattern.Scanner;
 
-import DesignPatternModels.DesignPatternType;
-import DesignPatternModels.BaseDesignPattern;
+import LogicalExpression.DesignPattern.DesignPatternType;
+import LogicalExpression.DesignPattern.BaseDesignPattern;
 import org.w3c.dom.Element;
 
 //klasa przetwarzajaca podana galaz XML w poszukiwaniu wzorcow
@@ -38,7 +38,7 @@ public class DesignPatternScanner implements IDesignPatternScanner{
         if (CheckIfSeqSeq(mainNode))
             return DesignPatternType.SeqSeq;
         
-        return DesignPatternType.Atomic;
+        return null;
     }
     
     private boolean CheckIfFlow(Element node) {
@@ -76,7 +76,7 @@ public class DesignPatternScanner implements IDesignPatternScanner{
         if(node.getChildNodes().getLength() != 1)
             return false;
         
-        if(node.getNodeName().equals("switch"))
+        if(node.getNodeName().equals("while"))
             return true;
         return false;
     }

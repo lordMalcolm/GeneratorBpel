@@ -1,13 +1,13 @@
-package DesignPatternScanner;
+package LogicalExpression.DesignPattern.Scanner;
 
-import DesignPatternModels.DesignPatternType;
-import DesignPatternModels.AtomicAction;
-import DesignPatternModels.BaseDesignPattern;
-import DesignPatternModels.FlowPattern;
-import DesignPatternModels.SeqSeqPattern;
-import DesignPatternModels.SequencePattern;
-import DesignPatternModels.SwitchPattern;
-import DesignPatternModels.WhilePattern;
+import LogicalExpression.DesignPattern.DesignPatternType;
+import LogicalExpression.AtomicAction.AtomicAction;
+import LogicalExpression.DesignPattern.BaseDesignPattern;
+import LogicalExpression.DesignPattern.FlowPattern;
+import LogicalExpression.DesignPattern.SeqSeqPattern;
+import LogicalExpression.DesignPattern.SequencePattern;
+import LogicalExpression.DesignPattern.SwitchPattern;
+import LogicalExpression.DesignPattern.WhilePattern;
 
 public class DesignPatternFactory {
     public static BaseDesignPattern CreatePattern(DesignPatternType type){

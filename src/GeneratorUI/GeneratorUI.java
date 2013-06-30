@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 public class GeneratorUI {
     
     public static void main(String[] args) {
-        IGenerator generator = new Generator("bpel02.xml", "");
+        IGenerator generator = new Generator("bpel04.xml", "");
         
         try {
             System.out.println(generator.run());
@@ -17,7 +17,6 @@ public class GeneratorUI {
         }
     }
 }
-
 //package GeneratorUI;
 //
 //import Generator.Generator;
@@ -29,13 +28,13 @@ public class GeneratorUI {
 //
 //public class GeneratorUI extends JPanel
 //                             implements ActionListener, FocusListener {
-//    static private final String newline = "\n";
+//    
 //    JButton inputButton;
 //    JButton outputButton;
 //    JButton runButton;
 //    JTextField outputFileField;
 //    
-//    JTextArea log;
+//    Log log;
 //    
 //    JFileChooser inputFc;
 //    JFileChooser outputFc;
@@ -49,10 +48,8 @@ public class GeneratorUI {
 //
 //        //Create the log first, because the action listeners
 //        //need to refer to it.
-//        log = new JTextArea(20,20);
-//        log.setMargin(new Insets(5,5,5,5));
-//        log.setEditable(false);
-//        JScrollPane logScrollPane = new JScrollPane(log);
+//        log = Log.getInstance();
+//        JScrollPane logScrollPane = log.getLogPane();
 //
 //        //Create a file chooser
 //        inputFc = new JFileChooser();
@@ -64,7 +61,7 @@ public class GeneratorUI {
 //        outputFc.setDialogTitle("Generator output directory path choosing");
 //        outputFc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
 //        
-//        outputFileField = new JTextField(30);
+//        outputFileField = new JTextField(15);
 //        outputFileField.addFocusListener(this);
 //                
 //        inputButton = new JButton("Wybierz plik wejściowy...");
@@ -78,6 +75,7 @@ public class GeneratorUI {
 //        
 //        JLabel label = new JLabel("Nazwa pliku wynikowego");
 //        JPanel buttonPanel = new JPanel(); //use FlowLayout
+//        
 //        buttonPanel.add(inputButton);
 //        buttonPanel.add(outputButton);
 //        buttonPanel.add(runButton);
@@ -100,11 +98,10 @@ public class GeneratorUI {
 //                inputFilePath = inputFc.getSelectedFile() == null ? 
 //                        null : inputFc.getSelectedFile().getAbsolutePath();
 //                
-//                log.append("Plik wejściowy: " + inputFilePath + "." + newline);
+//                log.append("Plik wejściowy: " + inputFilePath + "." );
 //            } else {
-//                log.append("Nie wybrano pliku wejściowego." + newline);
+//                log.append("Nie wybrano pliku wejściowego." );
 //            }
-//            log.setCaretPosition(log.getDocument().getLength());
 //
 //        } else if (e.getSource() == outputButton) {
 //            int returnVal = outputFc.showSaveDialog(GeneratorUI.this);
@@ -112,16 +109,18 @@ public class GeneratorUI {
 //                outputFilePath = outputFc.getSelectedFile() == null ? 
 //                        null : outputFc.getSelectedFile().getAbsolutePath();
 //                //This is where a real application would save the file.
-//                log.append("Folder pliku wynikowego: " + outputFilePath + "." + newline);
+//                log.append("Folder pliku wynikowego: " + outputFilePath + "." );
 //            } else {
-//                log.append("Nie wybrano pliku wynikowego " + newline);
+//                log.append("Nie wybrano pliku wynikowego " );
 //            }
-//            log.setCaretPosition(log.getDocument().getLength());
+//            
 //        } else if(e.getSource() == runButton){
 //            if(!isAllParamsSet()){
-//                log.append("Przed uruchomieniem generatora należy poprawnie wybrać wszystkie parametry." + newline);
+//                log.append("Przed uruchomieniem generatora należy poprawnie wybrać wszystkie parametry." );
 //            }
-//	    run();
+//            else {
+//                run();
+//            }
 //        }
 //    }
 //    
@@ -129,13 +128,18 @@ public class GeneratorUI {
 //	try{
 //            IGenerator generator = new Generator(inputFilePath, outputFilePath + outputFileName);
 //            String out = generator.run();
-//            log.append("Generowanie pliku zakończyło się sukcesem." + newline);
-//            log.append(out + newline);
+//            log.append("Generowanie pliku zakończyło się sukcesem." );
+//            log.append("Output: " + out );
+//            saveToFile(out);
 //        } catch(Exception ex){
-//            log.append(ex.getMessage());
+//            log.append(ex.toString());
 //        }
 //    }
 //
+//    private void saveToFile(String out){
+//        
+//    }
+//    
 //    private boolean isAllParamsSet(){
 //        if(inputFilePath == null || inputFilePath.isEmpty()){
 //           return false;
@@ -206,11 +210,10 @@ public class GeneratorUI {
 //                    outputFileField.getText().isEmpty()) {
 //                outputFileName = outputFileField.getText();
 //                
-//                log.append("Nazwa pliku wynikowego: " + outputFileName + "." + newline);
+//                log.append("Nazwa pliku wynikowego: " + outputFileName + "." );
 //            } else {
-//                log.append("Nazwa pliku wynikowego nie może być pusta" + newline);
+//                log.append("Nazwa pliku wynikowego nie może być pusta" );
 //            }
-//            log.setCaretPosition(log.getDocument().getLength());
 //        }
 //    }
 //}

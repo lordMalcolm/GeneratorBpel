@@ -1,4 +1,4 @@
-package DesignPatternModels;
+package LogicalExpression.DesignPattern;
 
 import org.w3c.dom.Element;
 

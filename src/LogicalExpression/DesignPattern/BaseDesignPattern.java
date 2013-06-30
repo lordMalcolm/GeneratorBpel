@@ -1,23 +1,32 @@
-package DesignPatternModels;
+package LogicalExpression.DesignPattern;
 
+import LogicalExpression.LogicalExpression;
 import java.util.ArrayList;
 import java.util.List;
 import org.w3c.dom.Element;
 
 //klasa przechowujaca informacje o danym wzorcu
-public abstract class BaseDesignPattern {
+public abstract class BaseDesignPattern extends LogicalExpression{
     public DesignPatternType type;
-    public String name;
-    public List<Element> childNodes;
     public List<String> arguments;
-    public List<BaseDesignPattern> nestedPatterns;
-    public int deepLevel;
 
     public BaseDesignPattern() {
         arguments = new ArrayList<>();
-        nestedPatterns = new ArrayList<>();
-        childNodes = new ArrayList<>();
     }
+    
+    @Override
+    public void PrintLogicalExpression(StringBuilder sb) {
+        sb.append(type.toString());
+        sb.append("(");
+        for(int i = 0; i < nestedPatterns.size(); i++){
+            nestedPatterns.get(i).PrintLogicalExpression(sb);
+            if (i < (nestedPatterns.size()-1))
+                sb.append(",");
+        }
+        sb.append(")");
+    }
+    
+    @Override
     public void Print(StringBuilder sb) {
         for (int i = 0; i < deepLevel; i++) {
             sb.append("   ");
