@@ -1,0 +1,28 @@
+<sequence name="main">
+	<sequence name="S1">
+	
+		<sequence name="F">
+			<invoke name="a" />
+			<flow>  
+				<receive name="b" />
+				<invoke name="c" />
+			</flow>
+		</sequence>
+
+		<switch name="SW">
+			<case condition="boolExpr-d">
+				<invoke name="e" />
+			 </case>/home/malcolm
+			<otherwise>
+				<receive name="f" />
+			</otherwise>
+		</switch>
+
+	</sequence>
+	
+	<sequence name="S1">
+		<invoke name="g" />
+		<receive name="h" />
+	</sequence>
+
+</sequence>

@@ -1,0 +1,46 @@
+<sequence name="main">
+  
+  <sequence name="FLO-1">
+	
+	<sequence name="SEQ-1">
+		<invoke name="a1" />
+		<receive name="a2" />
+	</sequence>
+	
+	<flow>
+	  
+	  <sequence name="SEQ-2">
+		<invoke name="b" />
+		<invoke name="c" />
+	  </sequence>
+	
+	  <switch name="SWI-1">
+		<case condition="boolExpr-d">
+		  <receive name="e" />
+		</case>
+		<otherwise>
+		  <invoke name="f" />
+		</otherwise>
+	  </switch>
+	  
+	</flow>
+  </sequence>
+ 
+  <switch name="SWI-3">
+	<case condition="boolExpr-g">
+	  <invoke name="h" />
+	</case>
+	<otherwise>
+	  <invoke name="i" />
+	</otherwise>
+  </switch>
+  
+  <while condition="WH-1">
+	<sequence name="SEQ-3">
+	  <receive name="k" />
+	  <invoke name="l" />
+	  <receive name="m" />
+	</sequence>
+  </while>
+ 
+</sequence>
