@@ -9,6 +9,8 @@ import logicalExpression.LogicalExpression;
 import java.io.File;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
+import logicalSpecification.generator.ILogicalSpecificationGenerator;
+import logicalSpecification.generator.LogicalSpecificationGenerator;
 import org.w3c.dom.Document;
 
 public class Generator implements IGenerator{
@@ -19,6 +21,7 @@ public class Generator implements IGenerator{
     private ILogicalExpression logicalExpression;
     private IInitialFileScanner initialFileScanner;
     private ILogicalExpressionGenerator logicalExpressionGenerator;
+    private ILogicalSpecificationGenerator logicalSpecificationGenerator;
     private final Log log;
    
     public Generator(String input, String output) {
@@ -26,6 +29,7 @@ public class Generator implements IGenerator{
         outputFilePath = output;
         initialFileScanner = new InitialFileScanner();
         logicalExpressionGenerator = new LogicalExpressionGenerator();
+        logicalSpecificationGenerator = new LogicalSpecificationGenerator();
         log = Log.getInstance();
     }
     
@@ -36,6 +40,8 @@ public class Generator implements IGenerator{
         
         logicalExpression = getLogicalExpression();
         StringBuilder sb = logicalExpression.printLogicalExpression();
+        //String logicalSpecification = logicalSpecificationGenerator.printLogicalSpecification(logicalExpression);
+        //sb.append(logicalSpecification);
         
         return sb.toString();
     }

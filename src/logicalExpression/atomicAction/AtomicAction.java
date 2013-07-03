@@ -4,7 +4,6 @@ import logicalExpression.LogicalExpression;
 import logicalExpression.LogicalExpressionType;
 
 public class AtomicAction extends LogicalExpression {
-    
     public ActionType actionType;
 
     public AtomicAction() {
@@ -22,5 +21,10 @@ public class AtomicAction extends LogicalExpression {
     @Override
     public String getSpecificType() {
         return actionType.toString();
+    }
+
+    @Override
+    public StringBuilder printLogicalSpecification() {
+        return new StringBuilder("niewiadomo");
     }
 }

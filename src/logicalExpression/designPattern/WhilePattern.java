@@ -10,6 +10,12 @@ public class WhilePattern extends BaseDesignPattern{
         name = mainNode.getAttribute("name");
         ConditionAction whileCondition = new ConditionAction(mainNode);
         nestedPatterns.add(whileCondition);
-
+    }
+    
+    @Override
+    public StringBuilder printLogicalSpecification() {
+        StringBuilder result = new StringBuilder();
+        
+        return result;
     }
 }

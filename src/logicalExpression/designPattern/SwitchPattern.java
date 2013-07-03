@@ -8,4 +8,11 @@ public class SwitchPattern extends BaseDesignPattern{
         designPatternType = DesignPatternType.Switch;
         name = mainNode.getAttribute("name");        
     }
+    
+    @Override
+    public StringBuilder printLogicalSpecification() {
+        StringBuilder result = new StringBuilder();
+        
+        return result;
+    }
 }

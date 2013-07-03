@@ -8,4 +8,11 @@ public class FlowPattern extends BaseDesignPattern {
         this.designPatternType = DesignPatternType.Flow;
         this.name = mainNode.getAttribute("name");
     }
+    
+    @Override
+    public StringBuilder printLogicalSpecification() {
+        StringBuilder result = new StringBuilder();
+        
+        return result;
+    }
 }

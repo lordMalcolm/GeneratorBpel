@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 public class GeneratorUI {
     
     public static void main(String[] args) {
-        IGenerator generator = new Generator("bpel04.xml", "");
+        IGenerator generator = new Generator("seq.xml", "");
         
         try {
             System.out.println(generator.run());
