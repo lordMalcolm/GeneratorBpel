@@ -3,23 +3,23 @@
   <sequence name="FLO-1">
 	
 	<sequence name="SEQ-1">
-		<action name="a1" />
-		<action name="a2" />
+		<invoke name="a1" />
+		<receive name="a2" />
 	</sequence>
 	
 	<flow>
 	  
 	  <sequence name="SEQ-2">
-		<action name="b" />
-		<action name="c" />
+		<invoke name="b" />
+		<invoke name="c" />
 	  </sequence>
 	
 	  <switch name="SWI-1">
 		<case condition="boolExpr-d">
-		  <action name="e" />
+		  <receive name="e" />
 		</case>
 		<otherwise>
-		  <action name="f" />
+		  <invoke name="f" />
 		</otherwise>
 	  </switch>
 	  
@@ -28,18 +28,18 @@
  
   <switch name="SWI-3">
 	<case condition="boolExpr-g">
-	  <action name="h" />
+	  <invoke name="h" />
 	</case>
 	<otherwise>
-	  <action name="i" />
+	  <invoke name="i" />
 	</otherwise>
   </switch>
   
   <while condition="WH-1">
 	<sequence name="SEQ-3">
-	  <action name="k" />
-	  <action name="l" />
-	  <action name="m" />
+	  <receive name="k" />
+	  <invoke name="l" />
+	  <receive name="m" />
 	</sequence>
   </while>
  

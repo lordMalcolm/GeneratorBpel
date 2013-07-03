@@ -1,6 +1,7 @@
 package logicalExpression.generator;
 
 import generatorUI.Log;
+import java.util.List;
 import logicalExpression.LogicalExpression;
 import logicalExpression.LogicalExpressionType;
 import logicalExpression.atomicAction.ActionType;
@@ -28,38 +29,34 @@ public class LogicalExpressionGenerator implements ILogicalExpressionGenerator{
 
     //rekurencyjna metoda przeszukiwania podanej gałęzi
     private LogicalExpression searchTree(Element node, int deepLevel) {
+        LogicalExpression baseExpression = logicalExpressionScanner.getLogicalExpression(node);
+        List<Element> nestedNodes = logicalExpressionScanner.getNodesToExpand(node, baseExpression);
         
-        LogicalExpression expression = logicalExpressionScanner.getLogicalExpression(node);
-        LogExpressionRecognitionStatus(expression);
-        expression.deepLevel = deepLevel;
-        for (Element child : expression.childNodes) {
-            
+        LogExpressionRecognitionStatus(baseExpression);
+        baseExpression.deepLevel = deepLevel;
+        
+        for (Element child : nestedNodes) {
             //przeszukiwanie kolejnych zagnieżdżonych gałęzi
-            LogicalExpression tmp = searchTree(child, deepLevel+1);
-            
+            LogicalExpression nestedExpression = searchTree(child, deepLevel+1);
             //jeżeli aktualne wyrażenie jest wzorcem dodawane są jego argumenty
-            if (tmp != null && expression.logicalExpressionType == LogicalExpressionType.DesignPattern) {
-                BaseDesignPattern base = (BaseDesignPattern) expression;
-                base.nestedPatterns.add(tmp);
+            if (nestedExpression != null && baseExpression.logicalExpressionType == LogicalExpressionType.DesignPattern) {
+                BaseDesignPattern basePattern = (BaseDesignPattern) baseExpression;
+                basePattern.nestedPatterns.add(nestedExpression);
             }
         }       
-        return expression;
+        return baseExpression;
     }
 
     private void LogExpressionRecognitionStatus(LogicalExpression expression) {
-        
         if (expression.logicalExpressionType == LogicalExpressionType.DesignPattern) {
             log.append("rozpoznano wzorzec: " + expression.getSpecificType());
             return;
         }
         
         AtomicAction action = (AtomicAction) expression;
-        if (action.actionType == ActionType.Unknown) {
+        if (action.actionType == ActionType.Unknown)
             log.append("nie rozpoznano aktywności");
-        }
-        else {
-            log.append("rozpoznano aktywność: " + expression.getSpecificType());
-        }
-        
+        else
+            log.append("rozpoznano aktywność: " + expression.getSpecificType());       
     }
 }

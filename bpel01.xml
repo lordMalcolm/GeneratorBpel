@@ -12,7 +12,7 @@
 		<switch name="SW">
 			<case condition="boolExpr-d">
 				<invoke name="e" />
-			 </case>
+			 </case>/home/malcolm
 			<otherwise>
 				<receive name="f" />
 			</otherwise>
