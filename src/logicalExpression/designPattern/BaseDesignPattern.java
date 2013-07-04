@@ -4,6 +4,7 @@ import logicalExpression.LogicalExpression;
 import java.util.ArrayList;
 import java.util.List;
 import logicalExpression.LogicalExpressionType;
+import logicalSpecification.generator.ArgumentSet;
 import logicalSpecification.patterns.PatternTemporalProperties;
 
 public abstract class BaseDesignPattern extends LogicalExpression {
@@ -44,48 +45,62 @@ public abstract class BaseDesignPattern extends LogicalExpression {
     public void setPatternParams(PatternTemporalProperties patternParams) {
         this.temporalProperties = patternParams;
     }
-       
-    public List<String> getTemporalFormulas() {
-        List<String> result = new ArrayList<>();
-        
-        if (isMostNested()) {
-            result.add(getBasicTemporalFormula());
-            return result;
-        }
-        
-        
-        
-        return result;
-    }
     
-    protected String getInArgument() {
-        LogicalExpression first = nestedPatterns.get(0);
-        if (first.logicalExpressionType == LogicalExpressionType.AtomicAction)
-            return temporalProperties.getIn();
-        
-        BaseDesignPattern firstPattern = (BaseDesignPattern) first;
-        return firstPattern.getInArgument();
-    }
-    
-    protected String getOutArgument() {
-        LogicalExpression last = nestedPatterns.get(nestedPatterns.size()-1);
-        if (last.logicalExpressionType == LogicalExpressionType.AtomicAction)
-            return temporalProperties.getOut();
-        
-        BaseDesignPattern lastPattern = (BaseDesignPattern) last;
-        return lastPattern.getOutArgument();       
-    }
-    
-    protected boolean isMostNested() {
+    public boolean isMostNested() {
         for (LogicalExpression logicalExpression : nestedPatterns)
             if (logicalExpression.logicalExpressionType == LogicalExpressionType.DesignPattern)
                 return false;
         
         return true;
     }
-     
-    protected String getBasicTemporalFormula() {
+    
+    public String getInArgument() {
+        LogicalExpression first = nestedPatterns.get(0);
+        if (first.logicalExpressionType == LogicalExpressionType.AtomicAction){
+            
+            String output = this.temporalProperties.getIn();
+            for (int i = 0; i < nestedPatterns.size(); i++)
+                output = output.replaceAll(temporalProperties.getParams().get(i), nestedPatterns.get(i).name);
+            
+            return output;
+        }
         
+        BaseDesignPattern pattern = (BaseDesignPattern) first;
+        return pattern.getInArgument();
+    }
+    
+    public String getOutArgument() {
+        LogicalExpression last = nestedPatterns.get(nestedPatterns.size()-1);
+        if (last.logicalExpressionType == LogicalExpressionType.AtomicAction){
+            
+            String output = this.temporalProperties.getOut();
+            for (int i = 0; i < nestedPatterns.size(); i++)
+                output = output.replaceAll(temporalProperties.getParams().get(i), nestedPatterns.get(i).name);
+            
+            return output;
+        }
+        
+        BaseDesignPattern pattern = (BaseDesignPattern) last;
+        return pattern.getOutArgument();
+    }
+     
+    public String getBasicTemporalFormula() {
+        String output = getFormulasSet();
+        for (int i = 0; i < nestedPatterns.size(); i++)
+            output = output.replaceAll(temporalProperties.getParams().get(i), nestedPatterns.get(i).name);
+        
+        return output;
+    }
+    
+    public String getTemporalFormulaForArgumentSet(ArgumentSet argumentSet) {
+        String output = getFormulasSet();
+        for (int i = 0; i < nestedPatterns.size(); i++)
+            output = output.replaceAll(temporalProperties.getParams().get(i), argumentSet.arguments.get(i));
+        
+        return output;
+    }
+
+    private String getFormulasSet() {
         StringBuilder logicFormulasSet = new StringBuilder();
         List<String> formulas = temporalProperties.getFormulas();
         logicFormulasSet.append("{");
@@ -96,10 +111,6 @@ public abstract class BaseDesignPattern extends LogicalExpression {
         logicFormulasSet.append("}");
         
         String output = logicFormulasSet.toString();
-        
-        for (int i = 0; i < nestedPatterns.size(); i++)
-            output = output.replaceAll(temporalProperties.getParams().get(i), nestedPatterns.get(i).name);
-        
         return output;
     }
 }

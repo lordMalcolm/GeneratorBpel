@@ -16,7 +16,6 @@ public class WhilePattern extends BaseDesignPattern{
     public StringBuilder printLogicalSpecification() {
         StringBuilder result = new StringBuilder();
         
-        result.append(getBasicTemporalFormula());
         
         return result;
     }

@@ -18,7 +18,7 @@ public class Generator implements IGenerator{
     private String inputFilePath;
     private String outputFilePath;
     private Document document;
-    private ILogicalExpression logicalExpression;
+    private LogicalExpression logicalExpression;
     private IInitialFileScanner initialFileScanner;
     private ILogicalExpressionGenerator logicalExpressionGenerator;
     private ILogicalSpecificationGenerator logicalSpecificationGenerator;
@@ -41,11 +41,8 @@ public class Generator implements IGenerator{
         logicalExpression = getLogicalExpression();
         //StringBuilder sb = logicalExpression.printLogicalExpression();
         
-        StringBuilder sb = new StringBuilder();
-        String logicalSpecification = logicalSpecificationGenerator.printLogicalSpecification(logicalExpression);
-        sb.append(logicalSpecification);
-        
-        return sb.toString();
+        String logicalSpecification = logicalSpecificationGenerator.getLogicalSpecification(logicalExpression);
+        return logicalSpecification;
     }
     
     @Override
