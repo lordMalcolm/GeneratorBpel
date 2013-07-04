@@ -1,4 +1,4 @@
 	<sequence name="SEQ-1">
-		<invoke name="a1" />
-		<receive name="a2" />
+		<invoke name="a" />
+		<receive name="b" />
 	</sequence>

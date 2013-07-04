@@ -39,9 +39,11 @@ public class Generator implements IGenerator{
         checkModel();
         
         logicalExpression = getLogicalExpression();
-        StringBuilder sb = logicalExpression.printLogicalExpression();
-        //String logicalSpecification = logicalSpecificationGenerator.printLogicalSpecification(logicalExpression);
-        //sb.append(logicalSpecification);
+        //StringBuilder sb = logicalExpression.printLogicalExpression();
+        
+        StringBuilder sb = new StringBuilder();
+        String logicalSpecification = logicalSpecificationGenerator.printLogicalSpecification(logicalExpression);
+        sb.append(logicalSpecification);
         
         return sb.toString();
     }
