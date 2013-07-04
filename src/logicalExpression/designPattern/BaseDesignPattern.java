@@ -7,6 +7,7 @@ import logicalExpression.LogicalExpressionType;
 import logicalSpecification.patterns.PatternTemporalProperties;
 
 public abstract class BaseDesignPattern extends LogicalExpression {
+    
     public DesignPatternType designPatternType;
     public List<LogicalExpression> nestedPatterns;
     protected PatternTemporalProperties temporalProperties;
@@ -43,7 +44,46 @@ public abstract class BaseDesignPattern extends LogicalExpression {
     public void setPatternParams(PatternTemporalProperties patternParams) {
         this.temporalProperties = patternParams;
     }
+       
+    public List<String> getTemporalFormulas() {
+        List<String> result = new ArrayList<>();
+        
+        if (isMostNested()) {
+            result.add(getBasicTemporalFormula());
+            return result;
+        }
+        
+        
+        
+        return result;
+    }
     
+    protected String getInArgument() {
+        LogicalExpression first = nestedPatterns.get(0);
+        if (first.logicalExpressionType == LogicalExpressionType.AtomicAction)
+            return temporalProperties.getIn();
+        
+        BaseDesignPattern firstPattern = (BaseDesignPattern) first;
+        return firstPattern.getInArgument();
+    }
+    
+    protected String getOutArgument() {
+        LogicalExpression last = nestedPatterns.get(nestedPatterns.size()-1);
+        if (last.logicalExpressionType == LogicalExpressionType.AtomicAction)
+            return temporalProperties.getOut();
+        
+        BaseDesignPattern lastPattern = (BaseDesignPattern) last;
+        return lastPattern.getOutArgument();       
+    }
+    
+    protected boolean isMostNested() {
+        for (LogicalExpression logicalExpression : nestedPatterns)
+            if (logicalExpression.logicalExpressionType == LogicalExpressionType.DesignPattern)
+                return false;
+        
+        return true;
+    }
+     
     protected String getBasicTemporalFormula() {
         
         StringBuilder logicFormulasSet = new StringBuilder();
@@ -61,21 +101,5 @@ public abstract class BaseDesignPattern extends LogicalExpression {
             output = output.replaceAll(temporalProperties.getParams().get(i), nestedPatterns.get(i).name);
         
         return output;
-    }
-    
-    public String getInArgument() {
-        if (nestedPatterns.size() > 0){
-            BaseDesignPattern first = (BaseDesignPattern) nestedPatterns.get(0);
-            return first.getInArgument();
-        }
-        return temporalProperties.getIn();
-    }
-    
-    public String getOutArgument() {
-        if (nestedPatterns.size() > 0){
-            BaseDesignPattern first = (BaseDesignPattern) nestedPatterns.get(0);
-            return first.getOutArgument();
-        }
-        return temporalProperties.getOut();
     }
 }
