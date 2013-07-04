@@ -62,4 +62,20 @@ public abstract class BaseDesignPattern extends LogicalExpression {
         
         return output;
     }
+    
+    public String getInArgument() {
+        if (nestedPatterns.size() > 0){
+            BaseDesignPattern first = (BaseDesignPattern) nestedPatterns.get(0);
+            return first.getInArgument();
+        }
+        return temporalProperties.getIn();
+    }
+    
+    public String getOutArgument() {
+        if (nestedPatterns.size() > 0){
+            BaseDesignPattern first = (BaseDesignPattern) nestedPatterns.get(0);
+            return first.getOutArgument();
+        }
+        return temporalProperties.getOut();
+    }
 }
