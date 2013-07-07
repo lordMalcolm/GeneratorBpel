@@ -1,6 +1,8 @@
 package logicalExpression.atomicAction;
 import org.w3c.dom.Element;
-
+/**
+ * Aktywność Condition
+ */
 public class ConditionAction extends AtomicAction {
     
     public ConditionAction(Element node) {

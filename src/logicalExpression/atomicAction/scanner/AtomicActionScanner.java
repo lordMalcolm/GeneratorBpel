@@ -3,7 +3,9 @@ import logicalExpression.atomicAction.ActionType;
 import logicalExpression.atomicAction.AtomicAction;
 import org.w3c.dom.Element;
 
-//klasa przetwarzajaca podana galaz XML w poszukiwaniu wzorcow
+/**
+ * Klasa przetwarzająca podaną gałąz XML w poszukiwaniu wzorców
+ */
 public class AtomicActionScanner implements IAtomicActionScanner {
 
     @Override

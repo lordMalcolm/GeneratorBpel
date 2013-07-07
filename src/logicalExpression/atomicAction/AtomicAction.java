@@ -2,7 +2,9 @@ package logicalExpression.atomicAction;
 
 import logicalExpression.LogicalExpression;
 import logicalExpression.LogicalExpressionType;
-
+/**
+ * Klasa bazowa dla aktywności
+ */
 public class AtomicAction extends LogicalExpression {
     public ActionType actionType;
 

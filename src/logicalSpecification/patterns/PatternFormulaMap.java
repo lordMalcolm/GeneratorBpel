@@ -2,19 +2,20 @@ package logicalSpecification.patterns;
 
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 import logicalExpression.designPattern.DesignPatternType;
 
-
+/**
+ * Nakładka na mapę przechowującą definicję wzorców
+ */
 public class PatternFormulaMap {
      
     private static PatternFormulaMap instance;
     
-    private HashMap<DesignPatternType, PatternParams> map;
+    private HashMap<DesignPatternType, PatternTemporalProperties> map;
     
     private static final String INPUT_FILE = "patterns";
     
@@ -33,7 +34,7 @@ public class PatternFormulaMap {
                 String line = scanner.nextLine();
                 if(line.isEmpty()){
                     i = 0;
-                    PatternParams pp = new PatternParams(in, out, params, formulas);
+                    PatternTemporalProperties pp = new PatternTemporalProperties(in, out, params, formulas);
                     map.put(DesignPatternType.getType(type) , pp);
                     formulas = new ArrayList<String>();
                     params = new ArrayList<String>();
@@ -60,8 +61,9 @@ public class PatternFormulaMap {
                 } else if(i == 2){
                     formulas.add(line);
                 }
-                 
             }
+            PatternTemporalProperties pp = new PatternTemporalProperties(in, out, params, formulas);
+            map.put(DesignPatternType.getType(type) , pp);
         }catch(FileNotFoundException ex){
             throw new RuntimeException(ex);
         }
@@ -93,7 +95,8 @@ public class PatternFormulaMap {
         return instance;
     }
     
-    public PatternParams get(DesignPatternType type){
-        return map.get(type);
+    public PatternTemporalProperties get(DesignPatternType type){
+        PatternTemporalProperties result = map.get(type);
+        return result;
     }
 }

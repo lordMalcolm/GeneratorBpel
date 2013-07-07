@@ -1,4 +1,14 @@
 	<sequence name="SEQ-1">
 		<invoke name="a1" />
 		<receive name="a2" />
+		<invoke name="a" />
+		<receive name="b" />
 	</sequence>
+        <while name="test">
+            <invoke name="test2"/>
+            <receive name="test3"/>
+        </while>
+        <seqseq name="test">
+            <invoke name="test2"/>
+            <receive name="test3"/>
+        </seqseq>

@@ -8,7 +8,9 @@ import logicalExpression.designPattern.SequencePattern;
 import logicalExpression.designPattern.SwitchPattern;
 import logicalExpression.designPattern.WhilePattern;
 import org.w3c.dom.Element;
-
+/**
+ * Fabryka tworząca wzorce procesowe
+ */
 public class DesignPatternFactory {
     public static BaseDesignPattern CreatePattern(DesignPatternType type, Element node){
         switch (type) {

@@ -11,7 +11,9 @@ import logicalExpression.scanner.ILogicalExpressionScanner;
 import logicalExpression.scanner.LogicalExpressionScanner;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
+/**
+ * Klasa generująca wyrażenia logiczne na podstawie dokumentu DOM
+ */
 public class LogicalExpressionGenerator implements ILogicalExpressionGenerator{
     
     private ILogicalExpressionScanner logicalExpressionScanner;

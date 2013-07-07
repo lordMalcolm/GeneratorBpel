@@ -13,6 +13,11 @@
 		<invoke name="b" />
 		<invoke name="c" />
 	  </sequence>
+           <sequence name="SEQ-1">               
+               <invoke name="a1" />                
+               <receive name="a2" />        
+               <invoke name="a3" /> 
+           </sequence>
 	
 	  <switch name="SWI-1">
 		<case condition="boolExpr-d">

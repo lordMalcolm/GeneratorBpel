@@ -1,6 +1,8 @@
 package logicalExpression.atomicAction;
 import org.w3c.dom.Element;
-
+/**
+ * Aktywność Receive
+ */
 public class ReceiveAction extends AtomicAction {
     
     public ReceiveAction(Element node) {

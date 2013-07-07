@@ -10,7 +10,9 @@ import logicalExpression.LogicalExpression;
 import logicalExpression.LogicalExpressionType;
 import org.w3c.dom.Element;
 
-//klasa przetwarzajaca podana galaz XML w poszukiwaniu wzorcow
+/*
+ * Klasa przetwarzajaca podana galaz XML w poszukiwaniu wzorcow
+ */ 
 public class LogicalExpressionScanner implements ILogicalExpressionScanner{
 
     private IDesignPatternScanner designPatternScanner;

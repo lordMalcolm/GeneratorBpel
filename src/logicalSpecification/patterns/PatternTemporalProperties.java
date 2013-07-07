@@ -1,18 +1,17 @@
 package logicalSpecification.patterns;
 
 import java.util.List;
-
-public class PatternParams {
+/*
+ * Definicja wzorcu procesowego
+ */
+public class PatternTemporalProperties {
+    
     private final String in;
-    
     private final String out;
-    
     private final List<String> params;
-    
     private final List<String> formulas;
     
-    public PatternParams(String in, String out,
-            List<String> params, List<String> formulas){
+    public PatternTemporalProperties(String in, String out, List<String> params, List<String> formulas){
         this.in = in;
         this.out = out;
         this.params = params;

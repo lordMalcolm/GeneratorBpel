@@ -1,7 +1,3 @@
-/*
- * To change this template, choose Tools | Templates
- * and open the template in the editor.
- */
 package generatorUI;
 
 import java.awt.Insets;
@@ -10,8 +6,9 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
 /**
- *
- * @author x
+ * Nakładka na JTextArea, wykorzystująca wzorzec projektowy Kompozyt
+ * umożliwia wypisywanie na konsoli logów z aplikacji
+ * 
  */
 public class Log {
     

@@ -4,13 +4,14 @@ import logicalExpression.LogicalExpression;
 import java.util.ArrayList;
 import java.util.List;
 import logicalExpression.LogicalExpressionType;
-import logicalSpecification.patterns.PatternFormulaMap;
-import logicalSpecification.patterns.PatternParams;
-
+import logicalSpecification.patterns.PatternTemporalProperties;
+/**
+ * Abstrakcyjna klasa bazowa dla wzorców
+ */
 public abstract class BaseDesignPattern extends LogicalExpression {
     public DesignPatternType designPatternType;
     public List<LogicalExpression> nestedPatterns;
-    protected PatternParams patternParams;
+    protected PatternTemporalProperties temporalProperties;
     
     public BaseDesignPattern() {
         nestedPatterns = new ArrayList<>();
@@ -41,7 +42,42 @@ public abstract class BaseDesignPattern extends LogicalExpression {
      * tylko w metodzie printLogicalExpression()
      * @param patternParams 
      */
-    public void setPatternParams(PatternParams patternParams) {
-        this.patternParams = patternParams;
+    public void setPatternParams(PatternTemporalProperties patternParams) {
+        this.temporalProperties = patternParams;
+    }
+    
+    protected String getBasicTemporalFormula() {
+        
+        StringBuilder logicFormulasSet = new StringBuilder();
+        List<String> formulas = temporalProperties.getFormulas();
+        logicFormulasSet.append("{");
+        for (String formula : formulas) {
+            logicFormulasSet.append(formula).append(",");
+        }
+        logicFormulasSet.deleteCharAt(logicFormulasSet.length()-1);
+        logicFormulasSet.append("}");
+        
+        String output = logicFormulasSet.toString();
+        
+        for (int i = 0; i < nestedPatterns.size(); i++)
+            output = output.replaceAll(temporalProperties.getParams().get(i), nestedPatterns.get(i).name);
+        
+        return output;
+    }
+    
+    public String getInArgument() {
+        if (nestedPatterns.size() > 0){
+            BaseDesignPattern first = (BaseDesignPattern) nestedPatterns.get(0);
+            return first.getInArgument();
+        }
+        return temporalProperties.getIn();
+    }
+    
+    public String getOutArgument() {
+        if (nestedPatterns.size() > 0){
+            BaseDesignPattern first = (BaseDesignPattern) nestedPatterns.get(0);
+            return first.getOutArgument();
+        }
+        return temporalProperties.getOut();
     }
 }

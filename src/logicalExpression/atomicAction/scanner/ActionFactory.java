@@ -6,7 +6,9 @@ import logicalExpression.atomicAction.ConditionAction;
 import logicalExpression.atomicAction.InvokeAction;
 import logicalExpression.atomicAction.ReceiveAction;
 import org.w3c.dom.Element;
-
+/**
+ * Fabryka tworząca aktywności
+ */
 public class ActionFactory {
     public static AtomicAction CreateAction(ActionType type, Element node) {
         switch (type) {

@@ -12,17 +12,20 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import logicalSpecification.generator.ILogicalSpecificationGenerator;
 import logicalSpecification.generator.LogicalSpecificationGenerator;
 import org.w3c.dom.Document;
-
+/**
+ * Klasa zajmująca się właściwym przetworzeniem pliku wejściowego
+ * w zbiór formuł
+ */
 public class Generator implements IGenerator{
 
-    private String inputFilePath;
-    private String outputFilePath;
-    private Document document;
     private ILogicalExpression logicalExpression;
     private IInitialFileScanner initialFileScanner;
     private ILogicalExpressionGenerator logicalExpressionGenerator;
     private ILogicalSpecificationGenerator logicalSpecificationGenerator;
     private final Log log;
+    private Document document;
+    private String inputFilePath;
+    private String outputFilePath;
    
     public Generator(String input, String output) {
         inputFilePath = input;
@@ -42,6 +45,10 @@ public class Generator implements IGenerator{
         StringBuilder sb = logicalExpression.printLogicalExpression();
         //String logicalSpecification = logicalSpecificationGenerator.printLogicalSpecification(logicalExpression);
         //sb.append(logicalSpecification);
+        //StringBuilder sb = logicalExpression.printLogicalExpression();
+
+        String logicalSpecification = logicalSpecificationGenerator.printLogicalSpecification(logicalExpression);
+        sb.append(logicalSpecification);
         
         return sb.toString();
     }

@@ -7,7 +7,9 @@ import logicalExpression.designPattern.BaseDesignPattern;
 import org.w3c.dom.Element;
 import org.w3c.dom.NodeList;
 
-//klasa przetwarzajaca podana galaz XML w poszukiwaniu wzorcow
+/**
+ * Klasa przetwarząjaca podaną gałąz XML w poszukiwaniu wzorców
+ */ 
 public class DesignPatternScanner implements IDesignPatternScanner{
 
     @Override

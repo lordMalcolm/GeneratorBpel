@@ -4,7 +4,10 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
-
+/**
+ * Klasa wstępnie przetwarzająca dokument w formacie DOM,
+ * usuwając z niego niepotrzebne i nieistotne elementy
+ */
 public class InitialFileScanner implements IInitialFileScanner{
 
     @Override

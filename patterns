@@ -14,7 +14,11 @@ a1 & c(a1) => <>a2
 &a1 & ~c(a2) => <>a3
 []~((a1 &a2) | (a1 & a3) | (a2 & a3))
 
-Loop-While(a1,a2):
+While(a1,a2):
 in: (a1) out: (a1 | a2)
-a1 & c(a1) => <> a2
-a1 & ~c(a1) => ~<> a2 []~(a1 & a2)
+a1 & ~c(a2) => <>a3
+[]~((a1 & a2) | (a1 & a3) | (a2 & a3))
+
+SeqSeq(a1,a4,a3):
+in: (a1) out: (a4 | a3)
+a1 & a4 & a3 => a4

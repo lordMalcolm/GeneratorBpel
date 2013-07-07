@@ -1,6 +1,8 @@
 package logicalExpression.atomicAction;
 import org.w3c.dom.Element;
-
+/**
+ * Aktywność Invoke
+ */
 public class InvokeAction extends AtomicAction {
     
     public InvokeAction(Element node) {
