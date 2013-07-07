@@ -1,8 +1,13 @@
 package logicalExpression.designPattern;
 
-/**
- * Typ wzorca procesowego
- */
+//enum obslugiwanych wzorcow procesowych
+
+import static logicalExpression.designPattern.DesignPatternType.Flow;
+import static logicalExpression.designPattern.DesignPatternType.SeqSeq;
+import static logicalExpression.designPattern.DesignPatternType.Sequence;
+import static logicalExpression.designPattern.DesignPatternType.Switch;
+import static logicalExpression.designPattern.DesignPatternType.While;
+
 public enum DesignPatternType {
     Sequence, Flow, Switch, While, SeqSeq;
     

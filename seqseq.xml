@@ -1,0 +1,8 @@
+<sequence name="SEQ-1">
+
+         <invoke name="a" />
+         <receive name="b" />
+         <invoke name="c" />
+   
+	
+</sequence>

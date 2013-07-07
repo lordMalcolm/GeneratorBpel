@@ -1,7 +1,7 @@
 package logicalSpecification.generator;
 
-import logicalExpression.ILogicalExpression;
+import logicalExpression.LogicalExpression;
 
 public interface ILogicalSpecificationGenerator {
-    String printLogicalSpecification(ILogicalExpression expression);
+    String getLogicalSpecification(LogicalExpression expression);    
 }

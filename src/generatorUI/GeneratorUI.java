@@ -1,23 +1,3 @@
-//package generatorUI;
-//
-//import generator.Generator;
-//import generator.IGenerator;
-//import java.util.logging.Level;
-//import java.util.logging.Logger;
-//public class GeneratorUI {
-//    
-//    public static void main(String[] args) {
-//
-//        IGenerator generator = new Generator("bpel04.xml", "");
-//        
-//        try {
-//            System.out.println(generator.run());
-//        } catch (Exception ex) {
-//            Logger.getLogger(GeneratorUI.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//    }
-//}
-
 package generatorUI;
 import generator.Generator;
 import generator.IGenerator;
@@ -26,11 +6,6 @@ import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
 
-/**
- * Klasa obsługująca interakcję z użytkownikiem,
- * wczytywanie pliku wejściowego i zapis do pliku wynikowego
- * 
- */
 public class GeneratorUI extends JPanel
                              implements ActionListener, FocusListener {
     
@@ -133,7 +108,6 @@ public class GeneratorUI extends JPanel
 	try{
             IGenerator generator = new Generator(inputFilePath, outputFilePath + outputFileName);
             String out = generator.run();
-            log.append("Output: " + out );
             log.append("Zakończono przetwarzanie.");
             saveToFile(out);
         } catch(Exception ex){

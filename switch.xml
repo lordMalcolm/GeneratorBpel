@@ -1,8 +1,8 @@
 	  <switch name="SWI-1">
-		<case condition="a1">
-		  <receive name="a2" />
+		<case condition="a">
+		  <receive name="b" />
 		</case>
 		<otherwise>
-		  <invoke name="a3" />
+		  <invoke name="c" />
 		</otherwise>
 	  </switch>

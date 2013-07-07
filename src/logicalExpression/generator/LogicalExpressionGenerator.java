@@ -11,22 +11,26 @@ import logicalExpression.scanner.ILogicalExpressionScanner;
 import logicalExpression.scanner.LogicalExpressionScanner;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-/**
- * Klasa generująca wyrażenia logiczne na podstawie dokumentu DOM
- */
+
 public class LogicalExpressionGenerator implements ILogicalExpressionGenerator{
     
     private ILogicalExpressionScanner logicalExpressionScanner;
     private final Log log;
+    private boolean error;
     
     public LogicalExpressionGenerator() {
         logicalExpressionScanner = new LogicalExpressionScanner();
         log = Log.getInstance();
+        error = false;
     }
     
     @Override
     public LogicalExpression generateLogicalExpression(Document document) {
-        return searchTree(document.getDocumentElement(), 0);
+        LogicalExpression result = searchTree(document.getDocumentElement(), 0);
+        if (error)
+            return null;
+        
+        return result;
     }   
 
     //rekurencyjna metoda przeszukiwania podanej gałęzi
@@ -56,8 +60,10 @@ public class LogicalExpressionGenerator implements ILogicalExpressionGenerator{
         }
         
         AtomicAction action = (AtomicAction) expression;
-        if (action.actionType == ActionType.Unknown)
+        if (action.actionType == ActionType.Unknown) {
             log.append("nie rozpoznano aktywności");
+            error = true;
+        }
         else
             log.append("rozpoznano aktywność: " + expression.getSpecificType());       
     }

@@ -1,0 +1,15 @@
+<sequence name="SEQ-1">
+  
+  <sequence name="F">
+	<receive name="fa" />
+	<flow name="nazwa">  
+	  <invoke name="fb" />
+	  <invoke name="fc" />
+	</flow>
+      
+  </sequence>
+   
+  <invoke name="b" />
+
+   
+</sequence>
