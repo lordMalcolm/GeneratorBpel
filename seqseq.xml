@@ -1,19 +1,8 @@
 <sequence name="SEQ-1">
 
-   <sequence name="SEQ-2">
-      <sequence name="SEQ-3">
          <invoke name="a" />
          <receive name="b" />
-      </sequence>
-      <sequence name="SEQ-3">
          <invoke name="c" />
-         <receive name="d" />
-      </sequence>
-   </sequence>
    
-   <sequence name="SEQ-4">
-      <invoke name="e" />
-      <receive name="f" />
-   </sequence>
 	
 </sequence>

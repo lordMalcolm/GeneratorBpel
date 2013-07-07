@@ -1,25 +1,15 @@
 <sequence name="SEQ-1">
   
   <sequence name="F">
-	<receive name="b" />
+	<receive name="fa" />
 	<flow name="nazwa">  
-	  <invoke name="c" />
-	  <invoke name="d" />
+	  <invoke name="fb" />
+	  <invoke name="fc" />
 	</flow>
       
   </sequence>
    
-  <invoke name="a" />
-   
-  <switch name="SWI-1">
-	<case condition="aa1">
-	  <receive name="aa2" />
-	</case>
-	<otherwise>
-	  <invoke name="aa3" />
-	</otherwise>
-  </switch>
-	  
+  <invoke name="b" />
 
    
 </sequence>

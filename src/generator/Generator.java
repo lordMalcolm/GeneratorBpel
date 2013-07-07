@@ -1,5 +1,4 @@
 package generator;
-import logicalExpression.ILogicalExpression;
 import logicalExpression.generator.LogicalExpressionGenerator;
 import logicalExpression.generator.ILogicalExpressionGenerator;
 import generatorUI.Log;
@@ -39,9 +38,14 @@ public class Generator implements IGenerator{
         checkModel();
         
         logicalExpression = getLogicalExpression();
-        //StringBuilder sb = logicalExpression.printLogicalExpression();
+        StringBuilder sb = logicalExpression.printLogicalExpression();
+        log.append("Wczytane wyrażenie:");
+        log.append(sb.toString());
         
-        String logicalSpecification = logicalSpecificationGenerator.getLogicalSpecification(logicalExpression);
+        String logicalSpecification = getLogicalSpecification();
+        log.append("Wygenerowana specyfikacja:");
+        log.append(logicalSpecification);
+        
         return logicalSpecification;
     }
     
@@ -70,6 +74,16 @@ public class Generator implements IGenerator{
         LogicalExpression result = logicalExpressionGenerator.generateLogicalExpression(document);
         log.append("Wykonano.");
         
+        return result;
+    }
+
+    private String getLogicalSpecification() {
+        if (logicalExpression == null)
+            return "Brak poprawnego wyrażenia.";
+        
+        log.append("Generowanie specyfikacji logicznej.");
+        String result = logicalSpecificationGenerator.getLogicalSpecification(logicalExpression);
+        log.append("Wykonano.");
         return result;
     }
 }
