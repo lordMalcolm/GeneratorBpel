@@ -3,6 +3,12 @@ import generator.Generator;
 import generator.IGenerator;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
 
@@ -116,7 +122,16 @@ public class GeneratorUI extends JPanel
     }
 
     private void saveToFile(String out){
-        
+        BufferedWriter outWriter = null;
+        try{// Create file 
+            FileWriter fstream = new FileWriter(outputFilePath + "\\" + outputFileName);
+            outWriter = new BufferedWriter(fstream);
+            outWriter.write(out);
+            outWriter.close();
+            log.append("Zapisano do pliku o nazwie : " + outputFilePath + "\\" + outputFileName );
+        } catch(IOException ex){
+          log.append("Nieudany zapis do pliku : " + ex.getMessage());
+        } 
     }
     
     private boolean isAllParamsSet(){

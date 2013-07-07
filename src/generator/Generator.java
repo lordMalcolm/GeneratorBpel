@@ -18,7 +18,7 @@ import org.w3c.dom.Document;
  */
 public class Generator implements IGenerator{
 
-    private ILogicalExpression logicalExpression;
+    private LogicalExpression logicalExpression;
     private IInitialFileScanner initialFileScanner;
     private ILogicalExpressionGenerator logicalExpressionGenerator;
     private ILogicalSpecificationGenerator logicalSpecificationGenerator;
@@ -47,7 +47,8 @@ public class Generator implements IGenerator{
         //sb.append(logicalSpecification);
         //StringBuilder sb = logicalExpression.printLogicalExpression();
 
-        String logicalSpecification = logicalSpecificationGenerator.printLogicalSpecification(logicalExpression);
+        String logicalSpecification = logicalSpecificationGenerator.getLogicalSpecification(logicalExpression);
+        System.out.println(logicalSpecification);
         sb.append(logicalSpecification);
         
         return sb.toString();
