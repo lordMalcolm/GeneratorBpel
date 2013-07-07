@@ -1,9 +1,14 @@
 package logicalSpecification.generator;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
+import java.util.Set;
 import logicalExpression.LogicalExpression;
 import logicalExpression.LogicalExpressionType;
 import logicalExpression.designPattern.BaseDesignPattern;
@@ -46,26 +51,23 @@ public class LogicalSpecificationGenerator implements ILogicalSpecificationGener
             return;
         }
             
-        HashMap<Integer, List<String>> map = getArgumentsMap(pattern);
-        List<List<String>> argumentsSets = fillArgumentsSets(map);       
-                        
-        return;
-    }
-
-    private int getNumberOfFormulas(HashMap<Integer, List<String>> map) {
-        int result = 1;
-        for (Map.Entry<Integer, List<String>> entry : map.entrySet()) {
-            List<String> list = entry.getValue();
-            result = result * list.size();
+        Map<Integer, Set<String>> map = getArgumentsMap(pattern);
+        
+        List<Map<Integer,String>> list = new LinkedList<>();
+        combinations( map, list );
+            
+        List<ArgumentSet> argumentsSet = getArgumentsSet(list);
+        for (ArgumentSet argumentSet : argumentsSet) {
+            sb.append(pattern.getTemporalFormulaForArgumentSet(argumentSet));
         }
-        return result;        
+
     }
     
-    private HashMap<Integer, List<String>> getArgumentsMap(BaseDesignPattern pattern) {
+    private Map<Integer, Set<String>>  getArgumentsMap(BaseDesignPattern pattern) {
         
-        HashMap<Integer, List<String>> map = new HashMap<>();
+        Map<Integer, Set<String>>  map = new HashMap<>();
         for (int i = 0; i < pattern.nestedPatterns.size(); i++) {
-            List<String> arguments = new ArrayList<>();
+            Set<String> arguments = new HashSet<>();
             LogicalExpression current = pattern.nestedPatterns.get(i);
             if (current.logicalExpressionType == LogicalExpressionType.AtomicAction){
                 arguments.add(current.name);
@@ -79,57 +81,46 @@ public class LogicalSpecificationGenerator implements ILogicalSpecificationGener
          }
          return map;
     }
-
-    private List<List<String>> initializeArgumentsSet(HashMap<Integer, List<String>> map) {
-        int formulasNumber = getNumberOfFormulas(map);
-        int formulaLength = map.size();
-        List<List<String>> argumentsSets = new ArrayList<>();
-        for(int i = 0; i < formulasNumber; i++){
-            List<String> n = new ArrayList<>();
-            for(int j = 0; j < formulaLength; j++){
-                n.add("-");
-            }
-            argumentsSets.add(n);
-        }
-        return argumentsSets;
+    
+    private static <K,V> void combinations( Map<K,Set<V>> map, List<Map<K,V>> list ) {
+        recurse( map, new LinkedList<>( map.keySet() ).listIterator(), new HashMap<K,V>(), list );
     }
 
-    private List<List<String>> fillArgumentsSets(HashMap<Integer, List<String>> map) {
-        List<List<String>> argumentsSets = initializeArgumentsSet(map);
-        
-        //wstępne wypełnienie
-        for (Map.Entry<Integer, List<String>> entry : map.entrySet()) {
-            Integer integer = entry.getKey();
-            List<String> list = entry.getValue();
-            for(int i = 0; i < list.size(); i++){
-                argumentsSets.get(i+integer).set(integer, list.get(i));
+    // helper method to do the recursion
+    private static <K,V> void recurse( Map<K,Set<V>> map, ListIterator<K> iter, Map<K,V> cur, List<Map<K,V>> list ) {
+        // we're at a leaf node in the recursion tree, add solution to list
+        if( !iter.hasNext() ) {
+            Map<K,V> entry = new HashMap<>();
+
+            for( K key : cur.keySet() ) {
+                entry.put( key, cur.get( key ) );
             }
+
+            list.add( entry );
+        } else {
+            K key = iter.next();
+            Set<V> set = map.get( key );
+
+            for( V value : set ) {
+                cur.put( key, value );
+                recurse( map, iter, cur, list );
+                cur.remove( key );
+            }
+
+            iter.previous();
         }
-        
-        //uzupełnienie pozostałych pól
-        for(int i = 0; i < argumentsSets.get(0).size(); i++){
-            List<String> args = new ArrayList<>();
-            for (int j = 0; j < argumentsSets.size(); j++){
-                if (!argumentsSets.get(j).get(i).equals("-"))
-                    args.add(argumentsSets.get(j).get(i));
-            }
+    }
+
+    private List<ArgumentSet> getArgumentsSet(List<Map<Integer, String>> list) {
+        List<ArgumentSet> argumentsSet = new ArrayList<>();
+        for( Map<Integer,String> combination : list ) {
             
-            if (args.size() == 1) {
-                for (int j = 0; j < argumentsSets.size(); j++){
-                    if (argumentsSets.get(j).get(i).equals("-"))
-                        argumentsSets.get(j).set(i, args.get(0));
-                }
-            }
-            else {
-                if (i == 0) {
-                    for (int j = 0; j < argumentsSets.get(0).size()/2+1; j++)
-                        argumentsSets.get(j).set(i, args.get(0));
-                    for (int j = argumentsSets.size()/2; j < argumentsSets.size(); j++)
-                        argumentsSets.get(j).set(i, args.get(1));
-                }
-            }
+            ArgumentSet s = new ArgumentSet();
+            for (String string : combination.values())
+                s.arguments.add(string);
+            argumentsSet.add(s);
+            
         }
-        
-        return argumentsSets;
+        return argumentsSet;
     }
 }

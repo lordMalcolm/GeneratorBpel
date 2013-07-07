@@ -15,8 +15,6 @@ public class SequencePattern extends BaseDesignPattern {
     public StringBuilder printLogicalSpecification() {
         StringBuilder result = new StringBuilder();
         
-
-        
         return result;
     }
 }
