@@ -3,12 +3,9 @@ import generator.Generator;
 import generator.IGenerator;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.BufferedOutputStream;
 import java.io.BufferedWriter;
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
 

@@ -1,5 +1,4 @@
 package generator;
-import logicalExpression.ILogicalExpression;
 import logicalExpression.generator.LogicalExpressionGenerator;
 import logicalExpression.generator.ILogicalExpressionGenerator;
 import generatorUI.Log;
