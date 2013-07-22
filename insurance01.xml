@@ -1,0 +1,21 @@
+<sequence>
+  <sequence>
+	<invoke name="InsuranceRequest" />
+	<flow>
+	  <receive name="InsuranceAResponse"/>
+	  <receive name="InsuranceBResposne" />
+	</flow>
+  </sequence>
+  
+  <switch>
+	<case condition="InsuranceAResposne InsuranceBResposne">
+	  <invoke name="SelectAInsurance" />
+	</case>
+	<otherwise>
+	  <invoke name="SelectBInsurance" />
+	</otherwise>
+  </switch>
+
+  <receive variable="InsuranceSelectionResponse"/>
+  
+</sequence>

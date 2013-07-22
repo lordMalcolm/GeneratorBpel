@@ -123,12 +123,18 @@ public class GeneratorUI extends JPanel
 
     private void saveToFile(String out){
         BufferedWriter outWriter = null;
+        String filePath;
+        if(outputFilePath.contains("/" ))
+            filePath = outputFilePath + "/" + outputFileName;
+        else
+            filePath = outputFilePath + "\\" + outputFileName;
+        
         try{// Create file 
-            FileWriter fstream = new FileWriter(outputFilePath + "\\" + outputFileName);
+            FileWriter fstream = new FileWriter(filePath);
             outWriter = new BufferedWriter(fstream);
             outWriter.write(out);
             outWriter.close();
-            log.append("Zapisano do pliku o nazwie : " + outputFilePath + "\\" + outputFileName );
+            log.append("Zapisano do pliku o nazwie : " + filePath );
         } catch(IOException ex){
           log.append("Nieudany zapis do pliku : " + ex.getMessage());
         } 
