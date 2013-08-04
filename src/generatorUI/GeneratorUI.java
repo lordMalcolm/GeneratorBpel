@@ -111,6 +111,12 @@ public class GeneratorUI extends JPanel
 	try{
             IGenerator generator = new Generator(inputFilePath, outputFilePath + outputFileName);
             String out = generator.run();
+            
+            if (out == null){
+                log.append("Zakończono niepowodzeniem.");
+                return;
+            }
+            
             log.append("Zakończono przetwarzanie.");
             saveToFile(out);
         } catch(Exception ex){

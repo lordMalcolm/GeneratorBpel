@@ -41,8 +41,12 @@ public class Generator implements IGenerator{
         checkModel();
         
         logicalExpression = getLogicalExpression();
+        
+        if (logicalExpression == null)
+            return null;
+        
         StringBuilder sb = logicalExpression.printLogicalExpression();
-
+        
         String logicalSpecification = logicalSpecificationGenerator.getLogicalSpecification(logicalExpression);
         sb.append(System.getProperty("line.separator"));
         sb.append(logicalSpecification);
@@ -73,6 +77,10 @@ public class Generator implements IGenerator{
     private LogicalExpression getLogicalExpression(){
         log.append("Pobieranie drzewa wzorców.");
         LogicalExpression result = logicalExpressionGenerator.generateLogicalExpression(document);
+        
+        if (result == null)
+            return null;
+        
         log.append("Wykonano.");
         
         return result;
