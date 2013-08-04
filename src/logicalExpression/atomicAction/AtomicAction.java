@@ -16,6 +16,8 @@ public class AtomicAction extends LogicalExpression {
     @Override
     public StringBuilder printLogicalExpression() {
         StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < deepLevel; i++)
+            sb.append("   ");
         sb.append(name);
         return sb;
     }

@@ -44,7 +44,7 @@ public class GeneratorUI extends JPanel
         outputFc.setDialogTitle("Generator output directory path choosing");
         outputFc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         
-        outputFileField = new JTextField(15);
+        outputFileField = new JTextField("out", 15);
         outputFileField.addFocusListener(this);
                 
         inputButton = new JButton("Wybierz plik wejściowy...");

@@ -21,14 +21,24 @@ public abstract class BaseDesignPattern extends LogicalExpression {
     @Override
     public StringBuilder printLogicalExpression() {
         StringBuilder sb = new StringBuilder();
+        
+        for (int i = 0; i < deepLevel; i++)
+            sb.append("   ");
         sb.append(designPatternType.toString());
         sb.append("(");
+        sb.append(System.getProperty("line.separator"));
+        
         for(int i = 0; i < nestedPatterns.size(); i++){
             sb.append(nestedPatterns.get(i).printLogicalExpression());
             if (i < (nestedPatterns.size()-1))
                 sb.append(",");
+            sb.append(System.getProperty("line.separator"));
         }
+        
+        for (int i = 0; i < deepLevel; i++)
+            sb.append("   ");
         sb.append(")");
+        
         return sb;
     }
     
@@ -109,7 +119,7 @@ public abstract class BaseDesignPattern extends LogicalExpression {
         }
         logicFormulasSet.deleteCharAt(logicFormulasSet.length()-1);
         logicFormulasSet.append("}");
-        
+        logicFormulasSet.append(System.getProperty("line.separator"));
         String output = logicFormulasSet.toString();
         return output;
     }

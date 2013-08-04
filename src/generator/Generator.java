@@ -42,12 +42,9 @@ public class Generator implements IGenerator{
         
         logicalExpression = getLogicalExpression();
         StringBuilder sb = logicalExpression.printLogicalExpression();
-        //String logicalSpecification = logicalSpecificationGenerator.printLogicalSpecification(logicalExpression);
-        //sb.append(logicalSpecification);
-        //StringBuilder sb = logicalExpression.printLogicalExpression();
 
         String logicalSpecification = logicalSpecificationGenerator.getLogicalSpecification(logicalExpression);
-        System.out.println(logicalSpecification);
+        sb.append(System.getProperty("line.separator"));
         sb.append(logicalSpecification);
         
         return sb.toString();
