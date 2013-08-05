@@ -17,12 +17,12 @@ public class PatternFormulaMap {
     
     private HashMap<DesignPatternType, PatternTemporalProperties> map;
     
-    private static final String INPUT_FILE = "patterns";
+    private static String patternFile = "patterns";
     
     private PatternFormulaMap(){
         try{
             map = new HashMap<>();
-            File file = new File(INPUT_FILE);
+            File file = new File(patternFile);
             Scanner scanner = new Scanner(file);
             String in = null;
             String out = null;
@@ -98,5 +98,9 @@ public class PatternFormulaMap {
     public PatternTemporalProperties get(DesignPatternType type){
         PatternTemporalProperties result = map.get(type);
         return result;
+    }
+    
+    public static void setInputFile(String patternFilePath){
+        PatternFormulaMap.patternFile = patternFilePath;
     }
 }

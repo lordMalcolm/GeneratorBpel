@@ -8,12 +8,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import javax.swing.*;
 import javax.swing.SwingUtilities;
+import logicalSpecification.patterns.PatternFormulaMap;
 
 public class GeneratorUI extends JPanel
                              implements ActionListener, FocusListener {
     
     JButton inputButton;
     JButton outputButton;
+    JButton patternButton;
     JButton runButton;
     JTextField outputFileField;
     
@@ -21,10 +23,12 @@ public class GeneratorUI extends JPanel
     
     JFileChooser inputFc;
     JFileChooser outputFc;
+    JFileChooser patternFc;
     
     String inputFilePath;
     String outputFilePath;
     String outputFileName;
+    String patternFilePath;
     
     public GeneratorUI() {
         super(new BorderLayout());
@@ -44,6 +48,11 @@ public class GeneratorUI extends JPanel
         outputFc.setDialogTitle("Generator output directory path choosing");
         outputFc.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
         
+        patternFc = new JFileChooser();
+        patternFc.setApproveButtonText("Choose");
+        patternFc.setDialogTitle("Generator pattern file path choosing");
+        patternFc.setFileSelectionMode(JFileChooser.FILES_ONLY);
+        
         outputFileField = new JTextField("out", 15);
         outputFileField.addFocusListener(this);
                 
@@ -53,6 +62,9 @@ public class GeneratorUI extends JPanel
         outputButton = new JButton("Wybierz folder pliku wynikowego...");
         outputButton.addActionListener(this);
 
+        patternButton = new JButton("Wybierz plik ze wzorcami...");
+        patternButton.addActionListener(this);
+        
         runButton = new JButton("Uruchom przetwarzanie");
         runButton.addActionListener(this);
         
@@ -61,6 +73,7 @@ public class GeneratorUI extends JPanel
         
         buttonPanel.add(inputButton);
         buttonPanel.add(outputButton);
+        buttonPanel.add(patternButton);
         buttonPanel.add(runButton);
         
         JPanel textPanel = new JPanel(new BorderLayout());
@@ -97,6 +110,19 @@ public class GeneratorUI extends JPanel
                 log.append("Nie wybrano pliku wynikowego " );
             }
             
+        } else if (e.getSource() == patternButton) {
+            int returnVal = patternFc.showOpenDialog(GeneratorUI.this);
+
+            if (returnVal == JFileChooser.APPROVE_OPTION) {
+                patternFilePath = patternFc.getSelectedFile() == null ? 
+                        null : patternFc.getSelectedFile().getAbsolutePath();
+                PatternFormulaMap.setInputFile(patternFilePath);
+                
+                log.append("Plik ze wzorcami: " + patternFilePath + "." );
+            } else {
+                log.append("Nie wybrano pliku ze wzorcami." );
+            }
+
         } else if(e.getSource() == runButton){
             if(!isAllParamsSet()){
                 log.append("Przed uruchomieniem generatora należy poprawnie wybrać wszystkie parametry." );
@@ -149,6 +175,8 @@ public class GeneratorUI extends JPanel
         } else if(outputFilePath == null || outputFilePath.isEmpty()){
             return false;
         } else if(outputFileName == null || outputFileName.isEmpty()){
+            return false;
+        } else if(patternFilePath == null || patternFilePath.isEmpty()){
             return false;
         }
         return true;
